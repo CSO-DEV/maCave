@@ -12,4 +12,4 @@ function Cellar(props) {
     );
 }
 
-export default Cellar;Cellar
+export default Cellar;
