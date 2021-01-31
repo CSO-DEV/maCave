@@ -23,23 +23,23 @@ function Connection(props) {
 
 
     return (
-        <Card.Body className="connectionContainer"
+        <div className="connectionContainer"
         style={{
             backgroundImage:"url(images/cave.jpg)",
         }}>
-            <div className="connexionTitle">
+            <div className="connectionTitle">
                 <h1>Ma Cave à Vin</h1>
             </div>
-            <div className="connexionSignIn">
+            <div className="connectionSignIn">
                 <h4>Je me connecte...</h4>
                 {tinyComponents.input("Email :","","","signInEmail","email","signInEmail","mail@serveur.com",true,"none","",dataholder)}
                 {tinyComponents.input("Mot de passe :","","","signInPwd","email","signInEmail","",true,10,TitleInputPwd,dataholder)}
-                <Button className='connexionSignInButton'
+                <Button className='connectionSignInButton'
                 onClick={()=>{
                     console.log("envoie");
                 }}>Envoyer</Button>
             </div>
-        </Card.Body>
+        </div>
     );
 }
 

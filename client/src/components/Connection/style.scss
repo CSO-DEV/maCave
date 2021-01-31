@@ -5,14 +5,14 @@
   background-size: cover;
   background-position: center;
   text-align: center;
-  .connexionTitle {
+  .connectionTitle {
     color: white;
   }
-  .connexionSignIn {
+  .connectionSignIn {
     background-color: rgba(255, 255, 255, 0.5);
-    width: 400px;
+    width: fit-content;
     text-align: center;
     padding: 10px;
-    margin: 100px auto;
+    margin: 20px auto;
   }
 }
