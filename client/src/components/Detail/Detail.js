@@ -7,7 +7,7 @@ import './style.scss';
 function Detail(props) {
     return (
         <div className="detailContainer">
-            Slide
+           
         </div>
     );
 }

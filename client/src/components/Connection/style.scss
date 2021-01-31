@@ -1,0 +1,18 @@
+.connectionContainer {
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  .connexionTitle {
+    color: white;
+  }
+  .connexionSignIn {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+    margin: 100px auto;
+  }
+}

@@ -1,0 +1,13 @@
+.tinyImput {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  & label {
+    margin-right: 10px;
+    width: 120px;
+    text-align: start;
+  }
+  & input {
+    width: 200px;
+  }
+}

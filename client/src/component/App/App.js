@@ -4,7 +4,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./style.scss";
-import Cellar from "../../components/Cellar/Cellar";
+import Connection from "../../components/Connection/Connection";
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path="/" component={Cellar} />
+          <Route path="/" component={Connection} />
         </Switch>
       </Router>
     </>
