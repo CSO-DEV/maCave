@@ -10,14 +10,14 @@ const router = express.Router();
 /**
  *Controller import
  */
-const posts = require("../../controllers/posts");
+const cellar = require("../../controllers/cellar");
+const post = require("../../controllers/posts");
 
 /**
  * Routes
  */
-//GET all posts
 
-router.get("/posts", posts.getPosts);
-
+router.post("/cellar", cellar.getCellar);
+router.post("/posts", post.getPosts);
 
 module.exports = router;

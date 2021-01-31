@@ -6,7 +6,10 @@ import './style.scss';
 
 function Cellar(props) {
     return (
-        <div className="cellarContainer">
+        <div className="cellarContainer"
+        style={{
+            backgroundImage:"url(images/cave.jpg)",
+        }}>
             Cellar
         </div>
     );
