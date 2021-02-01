@@ -15,23 +15,26 @@ function Connection(props) {
     const [connectionData,setConnectionData] = useState({});
     const [redirection,setRedirection] = useState(false);
 
-
     /**
-     * @method connectionSignIn : Module de connection signIn * SignIn module
-     * @param setData : donnée setState * setState data
-     * @param data : donnée state * state data
+     * @method connection : 
+     * @param type : Type d'action "signIn/register" * Action type "signIn / register"
+     * @param setData : Enregistrement de données saisie * Data entry recording
+     * @param data : Objet de données saisie * Data object entered
      */
-    const connectionSignIn=(setData,data)=>{
+    const connection=(type,setData,data)=>{
         const InputPwdTitle="Minimum : 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial";
         const InputEmailTitle="";
-        const type="signIn";
         /**
         * @function dataholder : Prise en compte des données saisies et contrôle des saisies * Taking into account of data entered and checking entries
         * @param e : Objet de saisie * Input object entry
         */
         function dataholder(e){
-            console.log(e.target.type);
-            if(e.target.name==="signInEmail" || e.target.name==="signInPwd"){
+            if(e.target.name==="signInEmail" || 
+            e.target.name==="signInPwd" || 
+            e.target.name==="registerEmail" || 
+            e.target.name==="registerPwd" || 
+            e.target.name==="lastname" || 
+            e.target.name==="firstname"){
                 setData(inputControl.dataholder(e,data));
             };
             if(e.target.type==="checkbox"){
@@ -48,100 +51,79 @@ function Connection(props) {
          * @param dataControl : Données saisies
          */
         function controlData(dataControl){
-            let emailControl=inputControl.emailControl(dataControl.signInEmail);
-            let pwdControl=inputControl.pwdControl(dataControl.signInPwd);
-            if(!dataControl.signInEmail){
-                alert("Veuillez saisir le champ Email");
-                return;
-            };
-            if(!dataControl.forgottenPwd){
-                if(!emailControl){
+            let signInEmailControl=inputControl.emailControl(dataControl.signInEmail);
+            let signInPwdControl=inputControl.pwdControl(dataControl.signInPwd);
+            let registerEmailControl=inputControl.emailControl(dataControl.registerEmail);
+            let registerPwdControl=inputControl.pwdControl(dataControl.registerPwd);
+
+            if(type==="signIn"){
+                if(!dataControl.signInEmail){
+                    alert("Veuillez saisir le champ Email");
+                    return;
+                };
+                if(!dataControl.forgottenPwd){
+                    if(!signInEmailControl){
+                        alert("Erreur de saisie de l'email " + InputEmailTitle);
+                        return;
+                    };
+                    if(!dataControl.signInPwd){
+                        alert("Veuillez saisir le champ mot de passe");
+                        return;
+                    };
+                    if(!signInPwdControl){
+                        alert("Erreur de saisie du mot de passe " + InputPwdTitle);
+                        return;
+                    };
+                    fetchToApi(type,dataControl)
+                }else{
+                    alert("Vous avez oubliez votre mot de passe => lancement modification mot de passe");
+                    return;  
+                };
+            }else{
+                if(!dataControl.lastname){
+                    alert("Veuillez saisir votre nom");
+                    return;
+                };
+                if(!dataControl.firstname){
+                    alert("Veuillez saisir votre prénom");
+                    return;
+                };
+                if(!dataControl.registerEmail){
+                    alert("Veuillez saisir votre email2");
+                    return;
+                };
+                if(!registerEmailControl){
                     alert("Erreur de saisie de l'email " + InputEmailTitle);
                     return;
                 };
-                if(!dataControl.signInPwd){
+                if(!dataControl.registerPwd){
                     alert("Veuillez saisir le champ mot de passe");
                     return;
                 };
-                if(!pwdControl){
+                if(!registerPwdControl){
                     alert("Erreur de saisie du mot de passe " + InputPwdTitle);
                     return;
                 };
                 fetchToApi(type,dataControl)
-            }else{
-                alert("Vous avez oubliez votre mot de passe => lancement modification mot de passe");
-                return;  
-            };
+            }           
         };
 
         return(
             <div className="connectionSignIn">                
-                {tinyComponents.input("Email :","","","signInEmail","email","signInEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
-                {tinyComponents.input("Mot de passe :","","","signInPwd","password","signInPwd","",true,10,InputPwdTitle,dataholder)}
-                {tinyComponents.checkBox("Mot de passe oublié","","","forgotten",dataholder)}
-                <Button className='connectionSignInButton'
-                onClick={()=>{
-                    controlData(data)
-                }}>Envoyer</Button>
-            </div>
-        )
-    };
-
-    const connectionRegister=(setData,data)=>{
-        const InputPwdTitle="Minimum : 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial";
-        const InputEmailTitle="";
-        const type="register";
-        /**
-        * @function dataholder : Prise en compte des données saisies et contrôle des saisies * Taking into account of data entered and checking entries
-        * @param e : Objet de saisie * Input object entry
-        */
-        function dataholder(e){
-            if(e.target.name==="registerEmail" || e.target.name==="registerPwd" || e.target.name==="lastname" || e.target.name==="firstname"){
-                setData(inputControl.dataholder(e,data));
-            };
-        };
-
-        /**
-         * @function controlData : Contrôle des données saisies
-         * @param dataControl : Données saisies
-         */
-        function controlData(dataControl){
-            console.log(dataControl);
-            let emailControl=inputControl.emailControl(dataControl.registerEmail);
-            let pwdControl=inputControl.pwdControl(dataControl.registerPwd);
-            if(!dataControl.lastname){
-                alert("Veuillez saisir votre nom");
-                return;
-            };
-            if(!dataControl.firstname){
-                alert("Veuillez saisir votre prénom");
-                return;
-            };
-            if(!dataControl.registerEmail){
-                alert("Veuillez saisir votre email2");
-                return;
-            };
-            if(!emailControl){
-                alert("Erreur de saisie de l'email " + InputEmailTitle);
-                return;
-            };
-            if(!dataControl.registerPwd){
-                alert("Veuillez saisir le champ mot de passe");
-                return;
-            };
-            if(!pwdControl){
-                alert("Erreur de saisie du mot de passe " + InputPwdTitle);
-                return;
-            };
-            fetchToApi(type,dataControl)
-        };
-
-        return(
-            <div className="connectionRegister">                
-                {tinyComponents.input("Nom :","","","lastname","lastname","lastname","",true,"none","",dataholder)}
-                {tinyComponents.input("Prénom :","","","firstname","firstname","firstname","",true,"none","",dataholder)}
-                {tinyComponents.input("Email :","","","registerEmail","email","registerEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
-                {tinyComponents.input("Mot de passe :","","","registerPwd","password","registerPwd","",true,10,InputPwdTitle,dataholder)}
+                {type==="signIn" ?                
+                    <div className="connectionSignIn">                
+                        {tinyComponents.input("Email :","","","signInEmail","email","signInEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
+                        {tinyComponents.input("Mot de passe :","","","signInPwd","password","signInPwd","",true,10,InputPwdTitle,dataholder)}
+                        {tinyComponents.checkBox("Mot de passe oublié","","","forgotten",dataholder)}
+                    </div>
+                    :
+                    <div className="connectionRegister">                
+                        {tinyComponents.input("Nom :","","","lastname","lastname","lastname","",true,"none","",dataholder)}
+                        {tinyComponents.input("Prénom :","","","firstname","firstname","firstname","",true,"none","",dataholder)}
+                        {tinyComponents.input("Email :","","","registerEmail","email","registerEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
+                        {tinyComponents.input("Mot de passe :","","","registerPwd","password","registerPwd","",true,10,InputPwdTitle,dataholder)}
+                </div>
+                } 
                 <Button className='connectionSignInButton'
                 onClick={()=>{
                     controlData(data)
@@ -156,54 +138,35 @@ function Connection(props) {
      * @param dataToApi : Données à transmettre a l'api * data to send to Api
      */
     const fetchToApi=(fetchRouter,dataToApi)=>{
-        if(fetchRouter==="signIn"){
-            fetchData("POST", "/api/" + fetchRouter, dataToApi, true).then(
-                (dataFromApi) => {
-                    localStorage.setItem('_IdMaCaveAVin',dataFromApi.cellar);
-                    localStorage.setItem('tokenMaCaveAVin',dataFromApi.token);
-                    alert('connexion réussie');
-                    setRedirection(true);
-                    },
-                (error) => {
-                  if(error.message===402){
-                    alert("La connection a échouée, veuillez contrôler votre email ou votre mot de passe");
-                  }
+        fetchData("POST", "/api/" + fetchRouter, dataToApi, true).then(
+            (dataFromApi) => {
+                localStorage.setItem('_IdMaCaveAVin',dataFromApi.cellar);
+                localStorage.setItem('tokenMaCaveAVin',dataFromApi.token);
+                if(fetchRouter==="signIn"){
+                    alert('connexion réussie')
+                }else{
+                    alert("Félicitation, vous venez d'ouvrir un compte ! Veuillez vous connecter")
                 }
-            );
-        };
-        if(fetchRouter==="register"){
-            fetchData("POST", "/api/" + fetchRouter, dataToApi, true).then(
-                (dataFromApi) => {
-                    alert("Félicitation, vous venez d'ouvrir un compte ! Veuillez vous connecter");
-                    setRedirection(true);
+                setRedirection(true);
                 },
-                (error) => {
-                  console.error("An error has occured while fetching posts");
-                  if(error.message===400){
+            (error) => {
+              if(error.message===402){
+                if(fetchRouter==="signIn"){
+                    alert("La connection a échouée, veuillez contrôler votre email ou votre mot de passe");
+                }else{
                     alert("Un compte existe déjà avec cette adresse email");
-                  };
-                  
                 }
-              );
-        };
-    };
-
-    const redirect=()=>{    
-        if(redirection){
-            return(
-                <Redirect to="/cellar"/>
-            ); 
-        };            
-        
+              }
+            }
+        );
     };
     
-    console.log(connectionData);
     return (
         <div className="connectionContainer"
         style={{
             backgroundImage:"url(images/cave.jpg)",
         }}>
-            {redirect()}
+            {redirection ? <Redirect to="/cellar"/> : <></>}
             <div className="connectionTitle">
                 <h1>Ma Cave à Vin</h1>
             </div>
@@ -215,7 +178,7 @@ function Connection(props) {
                         </Accordion.Toggle>
                     </Card.Header>
                         <Accordion.Collapse eventKey="0">
-                        <Card.Body>{connectionSignIn(setConnectionData,connectionData)}</Card.Body>
+                        <Card.Body>{connection("signIn",setConnectionData,connectionData)}</Card.Body>
                     </Accordion.Collapse>
                 </Card>
                 <Card className="connectionAccordionCard">
@@ -225,7 +188,7 @@ function Connection(props) {
                         </Accordion.Toggle>
                     </Card.Header>
                         <Accordion.Collapse eventKey="1">
-                        <Card.Body>{connectionRegister(setConnectionData,connectionData)}</Card.Body>
+                        <Card.Body>{connection("register",setConnectionData,connectionData)}</Card.Body>
                     </Accordion.Collapse>
                 </Card>           
             </Accordion>

@@ -11,7 +11,6 @@ const Cellar = require('../models/Cellar');
 
 const connection ={
     signIn:(req,res)=>{
-      console.log(req.body)
         let token;
         Cellar.findOne({"email" : req.body.signInEmail})
         .then((cellar)=>{        
@@ -28,12 +27,7 @@ const connection ={
             };
             console.log("mot de passe correct");
             token=jwt.sign({cellar:cellar._id}, config.LogKey,{expiresIn:"1h"});          
-            res.status(200).json({
-              success:true,
-              cellar:cellar._id,
-              token:token,
-            })
-            console.log(token)
+            res.status(200).json({success:true,cellar:cellar._id,token:token});
             Cellar.updateOne({"email":req.body.signinEmail},{"token":token},(err,data)=>{
               if (err){
                 console.log("erreur")
@@ -68,8 +62,12 @@ const connection ={
             });
             cellar
             .save()
-            .then(()=> res.status(200).json({message : "Inscription réussie"}))
-            .catch((error)=>res.status(400).json({message: "un compte déjà ouvert sur cette adresse mail"}));
+            .then(()=> {
+              res.status(200).json({success:true,cellar:cellar._id,token:token});
+                console.log("lancer mail de confirmation d'inscription")
+              }
+            )
+            .catch((error)=>res.status(402).json({message: "un compte déjà ouvert sur cette adresse mail"}));
         })
         .catch((error)=>res.status(500).json({message:error}));           
     },   
