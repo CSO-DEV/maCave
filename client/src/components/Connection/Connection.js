@@ -109,7 +109,7 @@ function Connection(props) {
         };
 
         return(
-            <div className="connectionSignIn">                
+            <div>                
                 {type==="signIn" ?                
                     <div className="connectionSignIn">                
                         {tinyComponents.input("Email :","","","signInEmail","email","signInEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
@@ -124,7 +124,7 @@ function Connection(props) {
                         {tinyComponents.input("Mot de passe :","","","registerPwd","password","registerPwd","",true,10,InputPwdTitle,dataholder)}
                 </div>
                 } 
-                <Button className='connectionSignInButton'
+                <Button className='connectionButton'
                 onClick={()=>{
                     controlData(data)
                 }}>Envoyer</Button>
