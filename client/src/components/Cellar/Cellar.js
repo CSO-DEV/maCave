@@ -10,6 +10,7 @@ function Cellar(props) {
         style={{
             backgroundImage:"url(images/cave.jpg)",
         }}>
+            <h1>cellar</h1>
         </div>
     );
 }

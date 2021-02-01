@@ -11,14 +11,15 @@ const Cellar = require('../models/Cellar');
 
 const connection ={
     signIn:(req,res)=>{
+      console.log(req.body)
         let token;
-        Cellar.findOne({"email" : req.body.signinEmail})
+        Cellar.findOne({"email" : req.body.signInEmail})
         .then((cellar)=>{        
           if (!cellar){
             return res.status(402).json({message:"email incorrect"});
           }
           bcrypt
-          .compare(req.body.signinPwd.toLowerCase(), cellar.pwd)
+          .compare(req.body.signInPwd.toLowerCase(), cellar.pwd)
           .then((valid)=>{
             if (!valid){
               return res

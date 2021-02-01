@@ -1,4 +1,4 @@
-.tinyImput {
+.tinyInput {
   display: flex;
   flex-direction: row;
   margin: 5px;
@@ -9,5 +9,14 @@
   }
   & input {
     width: 200px;
+  }
+}
+.tinyCheckBox {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin: 5px;
+  & label {
+    margin-right: 10px;
   }
 }

@@ -21,7 +21,7 @@
       */
      input(label,labelClass,inputClass,id,type,name,placeholder,required,maxLength,title,onchange){
          return(
-             <div className="tinyImput">
+             <div className="tinyInput">
                 <label className={labelClass} htmlFor={id}>{label}</label>
                 <input
                 id={id}
@@ -37,6 +37,21 @@
              </div>
          )
      },
+     checkBox(label,labelClass,inputClass,id,onchange){
+         return(
+             <div className="tinyCheckBox">
+                 <label className={labelClass} htmlFor={id}>{label}</label>
+                 <input 
+                 id={id}
+                 className={inputClass}
+                 type="checkbox"
+                 value='test'
+                 onChange={onchange}
+                 ></input>                 
+             </div>
+         )
+
+     }
      
  }
  export default tinyComponents;
