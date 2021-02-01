@@ -3,7 +3,7 @@
  */
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button,Card,Accordion} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import tinyComponents from '../../assets/tinyComponents';
@@ -30,7 +30,8 @@ function Connection(props) {
         * @param e : Objet de saisie * Input object entry
         */
         function dataholder(e){
-            if(e.target.type==="email" || e.target.type==="password"){
+            console.log(e.target.type);
+            if(e.target.name==="signInEmail" || e.target.name==="signInPwd"){
                 setData(inputControl.dataholder(e,data));
             };
             if(e.target.type==="checkbox"){
@@ -74,8 +75,7 @@ function Connection(props) {
         };
 
         return(
-            <div className="connectionSignIn">
-                <h4>Je me connecte...</h4>
+            <div className="connectionSignIn">                
                 {tinyComponents.input("Email :","","","signInEmail","email","signInEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
                 {tinyComponents.input("Mot de passe :","","","signInPwd","password","signInPwd","",true,10,InputPwdTitle,dataholder)}
                 {tinyComponents.checkBox("Mot de passe oublié","","","forgotten",dataholder)}
@@ -96,16 +96,8 @@ function Connection(props) {
         * @param e : Objet de saisie * Input object entry
         */
         function dataholder(e){
-            if(e.target.type==="email" || e.target.type==="password" || e.target.name==="lastname" || e.target.name==="firstname"){
-
+            if(e.target.name==="registerEmail" || e.target.name==="registerPwd" || e.target.name==="lastname" || e.target.name==="firstname"){
                 setData(inputControl.dataholder(e,data));
-            };
-            if(e.target.type==="checkbox"){
-                if(!data.forgottenPwd){
-                    setData({...data,"forgottenPwd":true});
-                }else{
-                    setData({...data,"forgottenPwd":false});
-                };              
             };
         };
 
@@ -114,36 +106,38 @@ function Connection(props) {
          * @param dataControl : Données saisies
          */
         function controlData(dataControl){
-            let emailControl=inputControl.emailControl(dataControl.signInEmail);
-            let pwdControl=inputControl.pwdControl(dataControl.signInPwd);
-            if(!dataControl.signInEmail){
-                alert("Veuillez saisir le champ Email");
+            console.log(dataControl);
+            let emailControl=inputControl.emailControl(dataControl.registerEmail);
+            let pwdControl=inputControl.pwdControl(dataControl.registerPwd);
+            if(!dataControl.lastname){
+                alert("Veuillez saisir votre nom");
                 return;
             };
-            if(!dataControl.forgottenPwd){
-                if(!emailControl){
-                    alert("Erreur de saisie de l'email " + InputEmailTitle);
-                    return;
-                };
-                if(!dataControl.signInPwd){
-                    alert("Veuillez saisir le champ mot de passe");
-                    return;
-                };
-                if(!pwdControl){
-                    alert("Erreur de saisie du mot de passe " + InputPwdTitle);
-                    return;
-                };
-                fetchToApi(type,dataControl)
-            }else{
-                alert("Vous avez oubliez votre mot de passe => lancement modification mot de passe");
-                return;  
+            if(!dataControl.firstname){
+                alert("Veuillez saisir votre prénom");
+                return;
             };
+            if(!dataControl.registerEmail){
+                alert("Veuillez saisir votre email2");
+                return;
+            };
+            if(!emailControl){
+                alert("Erreur de saisie de l'email " + InputEmailTitle);
+                return;
+            };
+            if(!dataControl.registerPwd){
+                alert("Veuillez saisir le champ mot de passe");
+                return;
+            };
+            if(!pwdControl){
+                alert("Erreur de saisie du mot de passe " + InputPwdTitle);
+                return;
+            };
+            fetchToApi(type,dataControl)
         };
 
-console.log(connectionData)
         return(
-            <div className="connectionSignIn">
-                <h4>Je crée un compte...</h4>
+            <div className="connectionRegister">                
                 {tinyComponents.input("Nom :","","","lastname","lastname","lastname","",true,"none","",dataholder)}
                 {tinyComponents.input("Prénom :","","","firstname","firstname","firstname","",true,"none","",dataholder)}
                 {tinyComponents.input("Email :","","","registerEmail","email","registerEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
@@ -155,7 +149,6 @@ console.log(connectionData)
             </div>
         )
     };
-
 
     /**
      * @method fetchToApi : Transmission des données vers l'api * Send data to Api
@@ -182,16 +175,12 @@ console.log(connectionData)
             fetchData("POST", "/api/" + fetchRouter, dataToApi, true).then(
                 (dataFromApi) => {
                     alert("Félicitation, vous venez d'ouvrir un compte ! Veuillez vous connecter");
-                    //setModalType('alertSuccess');
-                    //setToggledModal(true);
-                    //resetRegister()
+                    setRedirection(true);
                 },
                 (error) => {
                   console.error("An error has occured while fetching posts");
                   if(error.message===400){
                     alert("Un compte existe déjà avec cette adresse email");
-                    //setModalType('alertAlreadyExist');
-                    //setToggledModal(true);
                   };
                   
                 }
@@ -208,6 +197,7 @@ console.log(connectionData)
         
     };
     
+    console.log(connectionData);
     return (
         <div className="connectionContainer"
         style={{
@@ -217,8 +207,28 @@ console.log(connectionData)
             <div className="connectionTitle">
                 <h1>Ma Cave à Vin</h1>
             </div>
-            {connectionSignIn(setConnectionData,connectionData)}
-            {connectionRegister(setConnectionData,connectionData)}
+            <Accordion className="connectionAccordion" defaultActiveKey="0">
+                <Card className="connectionAccordionCard">
+                    <Card.Header className="connectionAccordionHeader">
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        <h4>Je me connecte...</h4>
+                        </Accordion.Toggle>
+                    </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                        <Card.Body>{connectionSignIn(setConnectionData,connectionData)}</Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+                <Card className="connectionAccordionCard">
+                    <Card.Header className="connectionAccordionHeader">
+                        <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                        <h4>Je crée un compte...</h4>
+                        </Accordion.Toggle>
+                    </Card.Header>
+                        <Accordion.Collapse eventKey="1">
+                        <Card.Body>{connectionRegister(setConnectionData,connectionData)}</Card.Body>
+                    </Accordion.Collapse>
+                </Card>           
+            </Accordion>
         </div>
     );
 }

@@ -58,12 +58,12 @@ const connection ={
     register:(req,res)=>{
         const body=req.body;
         bcrypt
-        .hash(req.body.pwd.toLowerCase(),10)
+        .hash(req.body.registerPwd.toLowerCase(),10)
         .then((hash)=>{
             const cellar = new Cellar({
                 firstname:body.firstname,
                 lastname :body.lastname,
-                email:body.email,
+                email:body.registerEmail,
                 pwd:hash,  
             });
             cellar
