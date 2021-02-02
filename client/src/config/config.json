@@ -1,4 +1,4 @@
 {
     "urlLocal":"http://localhost:3000",
-    "urlProd":"urlProd"
+    "urlProd":"https://ma-cave-a-vin.herokuapp.com"
 }
