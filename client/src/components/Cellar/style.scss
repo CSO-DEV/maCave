@@ -1,7 +1,50 @@
 .cellarContainer {
+  position: relative;
   width: 100vw;
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+  .cellarTitle {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    text-align: center;
+    & h1 {
+      margin: 0;
+    }
+    .cellarDisconnectionButton {
+      display: flex;
+      justify-content: flex-end;
+      text-align: right;
+    }
+  }
+  .cellarDisplay {
+    display: flex;
+    flex-direction: row;
+    .cellarDisplayShelf {
+      background-color: blue;
+      width: 500px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .cellarDisplayFrontShelf {
+        margin: 10px;
+      }
+      .cellarDisplayBackShelf {
+        margin: 10px;
+      }
+      & td {
+        padding: 5px;
+        .wineRow {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .wineRowText {
+            padding-left: 3px;
+          }
+        }
+      }
+    }
+  }
 }

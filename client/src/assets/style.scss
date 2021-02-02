@@ -1,7 +1,7 @@
 .tinyInput {
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  margin: 2px;
   & label {
     margin-right: 10px;
     width: 120px;
@@ -15,8 +15,33 @@
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  margin: 5px;
+  margin: 2px;
   & label {
     margin-right: 10px;
   }
+}
+.tinyLogOut {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin: 2px;
+  & label {
+    margin-right: 10px;
+  }
+}
+.tinyBottle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  margin: 5px;
+  & label {
+    margin: 0;
+  }
+}
+.tinyListbox {
+  width: -webkit-fill-available;
 }

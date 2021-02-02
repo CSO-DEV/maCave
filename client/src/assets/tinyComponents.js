@@ -37,6 +37,14 @@
              </div>
          )
      },
+     /**
+      * @method checkBox :
+      * @param {*} label 
+      * @param {*} labelClass 
+      * @param {*} inputClass 
+      * @param {*} id 
+      * @param {*} onchange 
+      */
      checkBox(label,labelClass,inputClass,id,onchange){
          return(
              <div className="tinyCheckBox">
@@ -51,7 +59,62 @@
              </div>
          )
 
-     }
+     },
+     /**
+      * @method logOut :
+      * @param {*} label 
+      * @param {*} labelClass 
+      * @param {*} id 
+      * @param {*} onclick 
+      */
+     logOut(label,labelClass,id,onclick){
+         return(
+            <div className="tinyLogOut">
+                <label className={labelClass} htmlFor={id}>{label}</label>
+                <button 
+                id={id}
+                onClick={onclick}>
+                    Deconnexion</button>
+            </div>
+         )
+     },
+     /**
+      * @method bottle :
+      * @param {*} color 
+      * @param {*} text 
+      */
+     bottle(color,text){
+         return(
+             <div className="tinyBottle"
+             style={{
+                 backgroundColor:color
+             }}>
+                 <label>{text}</label>
+             </div>
+         )
+     },
+     /**
+      * @method listbox :
+      * @param {*} name 
+      * @param {*} id 
+      * @param {*} array 
+      * @param {*} size 
+      */
+     listbox(name,id,array,size){
+         function option(array1){
+            return array1.map((element,index)=>{
+                return <option key={element+index} value={element}>{element}</option>
+            });
+         };
+         return(
+            <>
+            <select className="tinyListbox" name={name} id={id} size={size}>
+                {option(array)}
+            </select>
+            </>
+         );
+     },
+     
      
  }
  export default tinyComponents;
