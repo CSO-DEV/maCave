@@ -9,8 +9,7 @@ import fetchData from '../../lib/fetch'
 
 function Cellar(props) {
 
-  const [cellarList,setCellarList] = useState([]);  
-  const [products,setProducts] = useState([]);
+
     /**
      * @useEffect
      */
@@ -34,6 +33,7 @@ function Cellar(props) {
             ); 
     };
 
+    const cellarList=["Cave 1","Cave 2"];
     const products1 = [
       {
         cellar:1,
@@ -316,9 +316,13 @@ function Cellar(props) {
         ]
       },
     ]
-      
-      
     
+    function onclick(id){
+      console.log(id)
+    };
+    function cellarChoise(e){
+      console.log(e.target.value)
+    };
 
     return (
         <div className="cellarContainer"
@@ -333,7 +337,7 @@ function Cellar(props) {
             </div>
             </div>            
             <div className="cellarCarousel">
-                {caroussel.cellar(cellarList,products1)}
+                {caroussel.cellar(cellarList,products1,onclick,cellarChoise)}
             </div>
         </div>
     );

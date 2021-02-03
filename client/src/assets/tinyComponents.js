@@ -83,17 +83,32 @@
       * @param {*} color 
       * @param {*} text 
       */
-     bottle(color,text,size){
-         return(
-             <div className="tinyBottle"
-             style={{
-                 backgroundColor:color,
-                 width:size,
-                 height:size,
-             }}>
-                 <label>{text}</label>
-             </div>
-         )
+     bottle(color,text,size,row,onclick){
+         if(row){
+            return(
+                <div className="tinyBottle"
+                onClick={()=>onclick(row._id)}
+                style={{
+                    backgroundColor:color,
+                    width:size,
+                    height:size,
+                }}>
+                    <label>{text}</label>
+                </div>
+            )
+         }else{
+            return(
+                <div className="tinyBottle"
+                style={{
+                    backgroundColor:color,
+                    width:size,
+                    height:size,
+                }}>
+                    <label>{text}</label>
+                </div>
+            )  
+         }
+        
      },
      /**
       * @method listbox :
@@ -116,7 +131,7 @@
             </>
          );
      },
-     filter(list){
+     filter(list,cellarChoise){
         function optionList(){
             return list.map((element,index)=>{
                 return (
@@ -134,7 +149,7 @@
             name="filter"
             //defaultValue={categoryChoise}
             custom
-            onChange={(e)=>console.log(e.target.value + "" + e.target.name)}
+            onChange={(e)=>cellarChoise(e)}
         >
             {/*<option value="all">Toutes Catégories...</option>*/}
             {optionList()}

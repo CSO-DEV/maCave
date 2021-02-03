@@ -12,7 +12,7 @@ import tinyComponents from './tinyComponents';
 
 const caroussels={
 
-    cellar(cellarList,products){
+    cellar(cellarList,products,onclick,cellarChoise){        
         
         function column(title){
             const column = [{
@@ -35,7 +35,10 @@ const caroussels={
                     }
                   return(
                       <div className="wineRow">
-                          {tinyComponents.bottle(color,"","20px")}
+                          <div style={{minWidth:"30px",minHeight:"30px",backgroundColor:"grey"}}>
+                            {tinyComponents.bottle(color,"","20px",row,onclick)}
+                          </div>
+                          
                           <div className="wineRowText">                     
                                   <span className="wineRowCalled">{row.appellation}</span>
                                   <span className="wineRowVintage">{row.vintage}</span>                       
@@ -55,6 +58,7 @@ const caroussels={
                 )
             })
         };
+
         function shelf(array,cellar){
             return array.map((element,index)=>{
                 let frontData=element.shelfContent[0].front;
@@ -77,7 +81,7 @@ const caroussels={
         return(
             <>
             <div className="cellarCarouselheader">
-                {tinyComponents.filter(cellarList)}       
+                {tinyComponents.filter(cellarList,cellarChoise)}       
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
                 <div style={{display: "flex"}}>
