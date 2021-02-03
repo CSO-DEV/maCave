@@ -33,7 +33,9 @@ function Cellar(props) {
             ); 
     };
 
-
+    window.addEventListener("resize",()=>{
+        console.log(document.getElementById("cellarGlobalDisplay").offsetWidth)
+    })
 
 
     const top=()=>{
@@ -73,7 +75,8 @@ function Cellar(props) {
 
     return (
         <div className="cellarContainer"
-        style={{backgroundImage:"url(images/cave.jpg)"}}>
+        style={{backgroundImage:"url(images/cave.jpg)"}}
+        >
             <div className="topContainer">
                 {top()}
             </div>            
@@ -87,11 +90,23 @@ function Cellar(props) {
                         <button> right </button>
                     </div>
                 </div>       
-                <div className="cellarGlobalDisplay">
+                <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
                     <div className="cellarDisplay cellar1">
                         <Card className="cellarDisplayShelf" >
                         <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
                             <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
+                        </Card>
+                        <Card className="cellarDisplayShelf">
+                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
+                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
+                        </Card>
+                        <Card className="cellarDisplayShelf">
+                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
+                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
+                        </Card>
+                        <Card className="cellarDisplayShelf">
+                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
+                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
                         </Card>
                         <Card className="cellarDisplayShelf">
                             <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
@@ -108,6 +123,7 @@ function Cellar(props) {
                             <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
                         </Card>
                     </div>
+                    
             </div>     
             </div>
         </div>
