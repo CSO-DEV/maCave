@@ -49,7 +49,15 @@ function Cellar(props) {
         )
     };  
 
-    const products = [{"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015}];
+    const products = [
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
+        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015}];
     const columns = [{
       dataField: 'id',
       text: 'id',

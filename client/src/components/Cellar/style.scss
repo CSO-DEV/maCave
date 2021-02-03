@@ -1,8 +1,6 @@
 .cellarContainer {
   position: relative;
-  background-size: 200%;
-  background-repeat: no-repeat;
-  background-position: center;
+
   .cellarTitle {
     position: fixed;
     background-color: rgb(63, 34, 34);
@@ -25,7 +23,7 @@
     align-items: center;
     width: fit-content;
     margin: auto;
-    padding: 100px;
+    padding-top: 100px;
     .cellarCarouselheader {
       display: flex;
       flex-direction: row;
@@ -42,33 +40,42 @@
     flex-direction: row;
     overflow: hidden;
     overflow-y: auto;
-    max-width: 80vw;
+    max-width: 60vw;
     position: relative;
-    @media screen and (orientation: landscape) {
-      max-width: 60vw;
+    @media screen and (max-width: 1000px) {
+      max-width: 90vw;
     }
     .cellarDisplay {
       display: flex;
       flex-direction: column;
       margin-right: 10px;
+      @media screen and (max-width: 1000px) {
+        font-size: smaller;
+      }
       .cellarDisplayShelf {
         background-color: rgba(63, 34, 34, 0.7);
         display: flex;
-        width: 80vw;
+        width: 60vw;
         flex-direction: row;
-        @media screen and (orientation: landscape) {
-          width: 60vw;
+        @media screen and (max-width: 1000px) {
+          width: 90vw;
         }
         .cellarDisplayFrontShelf {
           margin: 10px;
           & th {
             padding: 0;
           }
+          .table {
+            margin-bottom: 0;
+          }
         }
         .cellarDisplayBackShelf {
           margin: 10px;
           & th {
             padding: 0;
+          }
+          .table {
+            margin-bottom: 0;
           }
         }
         & td {
