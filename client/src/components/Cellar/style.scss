@@ -19,29 +19,55 @@
       text-align: right;
     }
   }
-  .cellarDisplay {
+  .cellarCarousel {
     display: flex;
-    flex-direction: row;
-    .cellarDisplayShelf {
-      background-color: blue;
-      width: 500px;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    .cellarCarouselheader {
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
-      .cellarDisplayFrontShelf {
-        margin: 10px;
+      margin: 5px;
+      & span {
+        width: 100px;
+        text-align: center;
+        background-color: ivory;
       }
-      .cellarDisplayBackShelf {
-        margin: 10px;
-      }
-      & td {
-        padding: 5px;
-        .wineRow {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          .wineRowText {
-            padding-left: 3px;
+    }
+  }
+  .cellarGlobalDisplay {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    width: 500px;
+    .cellarDisplay {
+      display: flex;
+      flex-direction: column;
+      .cellarDisplayShelf {
+        background-color: blue;
+        width: 500px;
+        display: flex;
+        flex-direction: row;
+
+        .cellarDisplayFrontShelf {
+          margin: 10px;
+        }
+        .cellarDisplayBackShelf {
+          margin: 10px;
+        }
+        & td {
+          padding: 5px;
+          .wineRow {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .wineRowText {
+              display: flex;
+              flex-direction: column;
+              padding-left: 3px;
+            }
           }
         }
       }

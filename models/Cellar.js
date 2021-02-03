@@ -6,7 +6,9 @@ const mongoose = require('mongoose');
 const uniqueValidator = require("mongoose-unique-validator");
 
 const productSchema = new mongoose.Schema({
-   location:String,
+   cellar:Number,
+   shelf:Number,
+   position:String,
    registrationDate:String,
    color:String,
    region:String,
@@ -16,17 +18,17 @@ const productSchema = new mongoose.Schema({
    miniAppogee:String,
    maxiAppogee:String,
    grape:String,
+   purchasePrice:Number,
    purchasePlace:String,
-   sellingPrice:String,
-   score:String,
+   sellingPrice:Number,
+   score:Number,
    comment:String,
    picture:String,
    deletionDate : String,
    consumptionDate:String,
    bottleType:String,
-   organic:Boolean,
+   organic  :Boolean,
 });
-
 const cellarSchema = new mongoose.Schema({
     firstname:String,
     lastname:String,

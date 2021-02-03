@@ -22,6 +22,8 @@ const post = require("../../controllers/posts");
  router.post("/register", connection.register);
 
 router.post("/cellar", cellar.getCellar);
+router.post("/add", cellar.addProduct);
+router.post("/modify", cellar.modifyProduct);
 router.post("/posts", post.getPosts);
 
 module.exports = router;
