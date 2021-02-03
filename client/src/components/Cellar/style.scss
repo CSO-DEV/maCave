@@ -48,7 +48,6 @@
     .cellarDisplay {
       display: flex;
       flex-direction: column;
-      margin-right: 10px;
       @media screen and (max-width: 1000px) {
         font-size: smaller;
       }

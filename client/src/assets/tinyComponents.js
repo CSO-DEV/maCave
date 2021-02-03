@@ -2,7 +2,7 @@
  * tinyComponents.js : Contient des mini composants
  */
 
- import {Button,} from 'react-bootstrap'
+ import {Button,Form} from 'react-bootstrap'
  import './style.scss';
  import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -83,11 +83,13 @@
       * @param {*} color 
       * @param {*} text 
       */
-     bottle(color,text){
+     bottle(color,text,size){
          return(
              <div className="tinyBottle"
              style={{
-                 backgroundColor:color
+                 backgroundColor:color,
+                 width:size,
+                 height:size,
              }}>
                  <label>{text}</label>
              </div>
@@ -113,7 +115,32 @@
             </select>
             </>
          );
-     }, 
+     },
+     filter(list){
+        function optionList(){
+            return list.map((element,index)=>{
+                return (
+                    <option 
+                    key={"option" + index}
+                    value={element}>{element}</option>
+                );
+            });
+        };
+        return(
+            <Form.Control
+            as="select"
+            className="my-1 mr-sm-2 categoryFilter"
+            id="inlineFormCustomSelectPref"
+            name="filter"
+            //defaultValue={categoryChoise}
+            custom
+            onChange={(e)=>console.log(e.target.value + "" + e.target.name)}
+        >
+            {/*<option value="all">Toutes Catégories...</option>*/}
+            {optionList()}
+        </Form.Control>   
+        );
+    },
      
      
  }

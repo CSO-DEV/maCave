@@ -45,3 +45,52 @@
 .tinyListbox {
   width: -webkit-fill-available;
 }
+
+.cellarDisplay {
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 1000px) {
+    font-size: smaller;
+  }
+  .cellarDisplayShelf {
+    background-color: rgba(63, 34, 34, 0.7);
+    display: flex;
+    width: 60vw;
+    flex-direction: row;
+    @media screen and (max-width: 1000px) {
+      width: 90vw;
+    }
+    .cellarDisplayFrontShelf {
+      margin: 10px;
+      & th {
+        padding: 0;
+      }
+      .table {
+        margin-bottom: 0;
+      }
+    }
+    .cellarDisplayBackShelf {
+      margin: 10px;
+      & th {
+        padding: 0;
+      }
+      .table {
+        margin-bottom: 0;
+      }
+    }
+    & td {
+      padding: 5px;
+      .wineRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        line-height: 0.9;
+        .wineRowText {
+          display: flex;
+          flex-direction: column;
+          padding-left: 3px;
+        }
+      }
+    }
+  }
+}

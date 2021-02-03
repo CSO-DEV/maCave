@@ -1,16 +1,16 @@
 /**
  * Cellar.js : Page de visualisation de la cave
  */
-import React,{useEffect}from 'react';
+import React,{useEffect,useState}from 'react';
 import './style.scss';
 import tinyComponents from '../../assets/tinyComponents';
-import {Card} from 'react-bootstrap';
-import BootstrapTable from 'react-bootstrap-table-next';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import caroussel from '../../assets/carousels';
 import fetchData from '../../lib/fetch'
 
 function Cellar(props) {
 
+  const [cellarList,setCellarList] = useState([]);  
+  const [products,setProducts] = useState([]);
     /**
      * @useEffect
      */
@@ -24,7 +24,8 @@ function Cellar(props) {
     const getProduct=()=>{     
           fetchData("POST", "/api/cellar", {}, true).then(
               (result) => {
-                console.log(result)
+                //console.log(result);          
+                  
                 },
               (error) => {
                 console.error("An error has occured while fetching posts");
@@ -33,106 +34,306 @@ function Cellar(props) {
             ); 
     };
 
-    window.addEventListener("resize",()=>{
-        console.log(document.getElementById("cellarGlobalDisplay").offsetWidth)
-    })
+    const products1 = [
+      {
+        cellar:1,
+        cellarContent:[
+          {
+            shelf:1,
+            shelfContent:[
+              {
+                front:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE rouge",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 1,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 1,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  },
+                  {
+                    appellation: "CORTON CHARLEMAGNE rose",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 1,
+                    color: "rose",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 1,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+                back:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 1,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "back",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 1,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+              },
+            ],
+          },
+          {
+            shelf:2,
+            shelfContent:[
+              {
+                front:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 1,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 2,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+                back:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 1,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 2,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+              },
+            ],
+          },
+        ]
+      },
 
-
-    const top=()=>{
-        return (
-            <div className="cellarTitle">
-                <h1>Ma Cave à Vin</h1>
-                <div className="cellarDisconnectionButton">
-                    {tinyComponents.logOut("nom")}
-                </div>
-            </div>
-        )
-    };  
-
-    const products = [
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015},
-        {"id":"test","name":"Clayette 1 Back","called":"Mercurey","Vintage":2015}];
-    const columns = [{
-      dataField: 'id',
-      text: 'id',
-      hidden:true,
-    }, {
-      dataField: 'name',
-      text: products[0].name,
-      formatter: (cellContent, row) => {
-        return(
-            <div className="wineRow">
-                <button style={{borderRadius:"100%",width:"25px",height:"25px",backgroundColor:"red"}}></button>
-                <div className="wineRowText">                     
-                        <span className="wineRowCalled">{row.called}</span>
-                        <span className="wineRowVintage">{row.Vintage}</span>                       
-                </div>                                    
-            </div>
-            )}
-    }, {
-      dataField: 'price',
-      text: 'Product Price',
-      hidden:true,
-    }];
+      {
+        cellar:2,
+        cellarContent:[
+          {
+            shelf:1,
+            shelfContent:[
+              {
+                front:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 2,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 1,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+                back:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 2,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "back",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 1,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+              },
+            ],
+          },
+          {
+            shelf:2,
+            shelfContent:[
+              {
+                front:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 2,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 2,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+                back:[
+                  {
+                    appellation: "CORTON CHARLEMAGNE",
+                    bottleType: "BOUTEILLE 75CL",
+                    cellar: 2,
+                    color: "rouge",
+                    comment: "GRAND CRU BTL 128/1300",
+                    consumptionDate: "",
+                    deletionDate: "",
+                    grape: "",
+                    maxiAppogee: "",
+                    miniAppogee: "",
+                    organic: false,
+                    picture: "",
+                    position: "front",
+                    purchasePlace: "CAVE ANTIBES",
+                    purchasePrice: 68,
+                    region: "BOURGOGNE",
+                    registrationDate: "02/02/2021",
+                    score: 5,
+                    sellingPrice: 68,
+                    shelf: 2,
+                    vintage: 2016,
+                    winery: "MALDANT - PAUVELOT",
+                    _id: "60196e9bf0106f447ca01eaa",
+                  }
+                ],
+              },
+            ],
+          },
+        ]
+      },
+    ]
+      
+      
+    
 
     return (
         <div className="cellarContainer"
         style={{backgroundImage:"url(images/cave.jpg)"}}
         >
             <div className="topContainer">
-                {top()}
+            <div className="cellarTitle">
+                <h1>Ma Cave à Vin</h1>
+                <div className="cellarDisconnectionButton">
+                    {tinyComponents.logOut("nom")}
+                </div>
+            </div>
             </div>            
             <div className="cellarCarousel">
-                <div className="cellarCarouselheader">
-                    <div>
-                        <button> left </button>
-                    </div>
-                    <span>Cave 1</span>
-                    <div>
-                        <button> right </button>
-                    </div>
-                </div>       
-                <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
-                    <div className="cellarDisplay cellar1">
-                        <Card className="cellarDisplayShelf" >
-                        <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                        <Card className="cellarDisplayShelf">
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                        <Card className="cellarDisplayShelf">
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                        <Card className="cellarDisplayShelf">
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                        <Card className="cellarDisplayShelf">
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                    </div>
-                    <div className="cellarDisplay cellar2">
-                        <Card className="cellarDisplayShelf" >
-                            <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                        <Card className="cellarDisplayShelf">
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                            <Card className="cellarDisplayBackShelf"><BootstrapTable keyField='id' data={ products } columns={ columns } /></Card>
-                        </Card>
-                    </div>
-                    
-            </div>     
+                {caroussel.cellar(cellarList,products1)}
             </div>
         </div>
     );
