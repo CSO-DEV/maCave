@@ -87,7 +87,7 @@
          if(row){
             return(
                 <div className="tinyBottle"
-                onClick={()=>onclick(row._id)}
+                onClick={()=>onclick(row)}
                 style={{
                     backgroundColor:color,
                     width:size,

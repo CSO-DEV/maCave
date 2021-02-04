@@ -10,7 +10,9 @@ import fetchData from '../../lib/fetch'
 function Cellar(props) {
 
     const [cellar,setCellar] = useState([]);
-    const [products,setProducts] = useState([]);
+    const [productList,setProductList] = useState([]);
+    const [initProductList,setInitProductList] = useState([]);
+
     /**
      * @useEffect
      */
@@ -24,20 +26,22 @@ function Cellar(props) {
     const getProduct=()=>{     
           fetchData("POST", "/api/cellar", {}, true).then(
               (result) => {
-                //console.log(result.cellar);    
+
                 let [cellarList,shelfbyCellarList,productsList]=[[],[],[]];
-                result.cellar.forEach(element => {
+                result.cellar.forEach(element => {  
                   cellarList.push(element.cellar);
                   shelfbyCellarList.push("Cave"+element.cellar+"Clayette"+element.shelf);
                 });
+
                 let uniqCellarList = [...new Set(cellarList.sort())];
-                let uniqShelfbyCellarList = [...new Set(shelfbyCellarList.sort())];                
+                let uniqShelfbyCellarList = [...new Set(shelfbyCellarList.sort())];
+
                 uniqCellarList.forEach((cellar,cellarIndex)=>{
                   productsList.push({"cellar":cellar,"cellarContent":[]})
                   let nbShelf=0;
                     uniqShelfbyCellarList.forEach(shelf=>{
                       if(shelf.includes("Cave" + cellar)){
-                        nbShelf=+1;
+                        nbShelf=parseInt(shelf.replace("Cave" + cellar + "Clayette", ""))
                         productsList[cellarIndex].cellarContent.push({"shelf":nbShelf, shelfContent:[{"front":[]},{"back":[]}]});
                         result.cellar.forEach((element,index) => {
                           if(element.cellar===cellar && element.shelf===nbShelf && element.position==="back"){
@@ -55,8 +59,8 @@ function Cellar(props) {
                     });                  
                 });
                 setCellar(uniqCellarList);
-                setProducts(productsList);
-
+                setProductList(productsList);
+                setInitProductList(result.cellar);
                 },
               (error) => {
                 console.error("An error has occured while fetching posts");
@@ -64,298 +68,16 @@ function Cellar(props) {
               }
             ); 
     };
-    //console.log(products);
-    //console.log(cellar);
-    const cellarList=["Cave 1","Cave 2"];
-    const products1 = [
-      {
-        cellar:1,
-        cellarContent:[
-          {
-            shelf:1,
-            shelfContent:[
-              {
-                front:[
-                  {
-                    appellation: "Corton Charlemagne",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 1,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 1,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea1",
-                  },
-                  {
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 1,
-                    color: "rose",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 1,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea2",
-                  }
-                ],
-                back:[
-                  /*{
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 1,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "back",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 1,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea3",
-                  }*/
-                ],
-              },
-            ],
-          },
-          {
-            shelf:2,
-            shelfContent:[
-              {
-                front:[
-                  {
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 1,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 2,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea4",
-                  }
-                ],
-                back:[
-                  {
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 1,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 2,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea5",
-                  }
-                ],
-              },
-            ],
-          },
-        ]
-      },
-
-      {
-        cellar:2,
-        cellarContent:[
-          {
-            shelf:1,
-            shelfContent:[
-              {
-                front:[
-                  {
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 2,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 1,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea6",
-                  }
-                ],
-                back:[
-                  /*{
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 2,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "back",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 1,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea7",
-                  }*/
-                ],
-              },
-            ],
-          },
-          {
-            shelf:2,
-            shelfContent:[
-              {
-                front:[
-                  {
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 2,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 2,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea8",
-                  }
-                ],
-                back:[
-                  {
-                    appellation: "CORTON CHARLEMAGNE",
-                    bottleType: "BOUTEILLE 75CL",
-                    cellar: 2,
-                    color: "rouge",
-                    comment: "GRAND CRU BTL 128/1300",
-                    consumptionDate: "",
-                    deletionDate: "",
-                    grape: "",
-                    maxiAppogee: "",
-                    miniAppogee: "",
-                    organic: false,
-                    picture: "",
-                    position: "front",
-                    purchasePlace: "CAVE ANTIBES",
-                    purchasePrice: 68,
-                    region: "BOURGOGNE",
-                    registrationDate: "02/02/2021",
-                    score: 5,
-                    sellingPrice: 68,
-                    shelf: 2,
-                    vintage: 2016,
-                    winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01ea9",
-                  }
-                ],
-              },
-            ],
-          },
-        ]
-      },
-    ]
     
-    function onclick(id){
-      alert(id)
+    function onclick(row){
+      alert(row.appellation)
+   
     };
+
     function cellarChoise(e){
       alert(e.target.value)
     };
+
 
     return (
         <div className="cellarContainer"
@@ -370,7 +92,7 @@ function Cellar(props) {
             </div>
             </div>            
             <div className="cellarCarousel">
-                {caroussel.cellar(cellar,products,onclick,cellarChoise)}
+                {caroussel.cellar(cellar,productList,onclick,cellarChoise)}
             </div>
         </div>
     );
