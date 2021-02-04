@@ -67,7 +67,7 @@
       * @param {*} id 
       * @param {*} onclick 
       */
-     logOut(label,labelClass,id,onclick){
+     logOut(label,onclick,labelClass,id){
          return(
             <div className="tinyLogOut">
                 <label className={labelClass} htmlFor={id}>{label}</label>

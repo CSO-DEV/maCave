@@ -28,7 +28,7 @@ const connection ={
             console.log("mot de passe correct");
             token=jwt.sign({cellar:cellar._id}, config.LogKey,{expiresIn:"1h"});          
             res.status(200).json({success:true,cellar:cellar._id,token:token});
-            Cellar.updateOne({"email":req.body.signinEmail},{"token":token},(err,data)=>{
+            Cellar.updateOne({"email":req.body.signInEmail},{"token":token},(err,data)=>{
               if (err){
                 console.log("erreur")
               }else{

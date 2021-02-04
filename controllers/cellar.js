@@ -15,6 +15,7 @@ const cellar = {
       } else {
         res.json({
             cellar: data[0].product,
+            name: data[0].firstname + " " + data[0].lastname ,
         });
       }
     });
@@ -31,7 +32,6 @@ const cellar = {
     });
   },
   addProduct:(req,res)=>{
-    console.log(req.body)
     const body=req.body.product;
     const product={
       "cellar":body.cellar,

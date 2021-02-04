@@ -123,12 +123,14 @@ const caroussels={
         return(
             <>
             <div className="cellarCarouselheader">
-                {tinyComponents.filter(cellarList,cellarChoise,"Cave ")}       
+                {tinyComponents.filter(cellarList,cellarChoise,"Cave ")}
+                <button>test</button>      
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
                 <div style={{display: "flex"}}>
                     {cellar(products)}
-                </div>            
+                </div>
+                          
             </div> 
         </>
         )
