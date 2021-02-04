@@ -56,7 +56,6 @@ function Cellar(props) {
                 });
                 setCellar(uniqCellarList);
                 setProducts(productsList);
-                console.log(productsList)
 
                 },
               (error) => {
@@ -352,10 +351,10 @@ function Cellar(props) {
     ]
     
     function onclick(id){
-      console.log(id)
+      alert(id)
     };
     function cellarChoise(e){
-      console.log(e.target.value)
+      alert(e.target.value)
     };
 
     return (
@@ -371,7 +370,7 @@ function Cellar(props) {
             </div>
             </div>            
             <div className="cellarCarousel">
-                {caroussel.cellar(cellarList,products,onclick,cellarChoise)}
+                {caroussel.cellar(cellar,products,onclick,cellarChoise)}
             </div>
         </div>
     );

@@ -131,13 +131,13 @@
             </>
          );
      },
-     filter(list,cellarChoise){
+     filter(list,cellarChoise,text){
         function optionList(){
             return list.map((element,index)=>{
                 return (
                     <option 
                     key={"option" + index}
-                    value={element}>{element}</option>
+                    value={element}>{text+element}</option>
                 );
             });
         };

@@ -25,7 +25,7 @@ const caroussels={
                 formatter: (cellContent, row) => {
                     if(row.appellation==="Ajouter"){
                         return(
-                            <div className="wineRow">
+                            <div className="wineRow wineRowButton">
                                 <Button variant="secondary" size="sm" onClick={()=>alert("Nouvelle bouteille dans cave " + row.cellar + " Clayette " + row.shelf + " " +  row.position)}>Ajouter une bouteille</Button>                     
                             </div>
                             )
@@ -60,7 +60,6 @@ const caroussels={
 
         function cellar(array){
             return array.map((element,index)=>{
-                console.log(element)
                 return (
                     <div className="cellarDisplay" name={element.cellar} key={'cellar' + index}>
                         {shelf(element.cellarContent,element.cellar)}
@@ -124,7 +123,7 @@ const caroussels={
         return(
             <>
             <div className="cellarCarouselheader">
-                {tinyComponents.filter(cellarList,cellarChoise)}       
+                {tinyComponents.filter(cellarList,cellarChoise,"Cave ")}       
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
                 <div style={{display: "flex"}}>
