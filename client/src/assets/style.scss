@@ -38,6 +38,7 @@
   border-radius: 50%;
   text-align: center;
   margin: 5px;
+  border: 1px solid black;
   & label {
     margin: 0;
   }
@@ -86,10 +87,16 @@
         flex-direction: row;
         align-items: center;
         line-height: 0.9;
+        justify-content: "center";
         .wineRowText {
           display: flex;
           flex-direction: column;
           padding-left: 3px;
+        }
+        .wineRowBottle {
+          background-color: rgb(190, 187, 187);
+          min-width: 30px;
+          min-height: 30px;
         }
       }
     }

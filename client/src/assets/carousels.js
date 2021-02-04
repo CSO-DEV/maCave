@@ -24,9 +24,8 @@ const caroussels={
                 text: title,
                 formatter: (cellContent, row) => {
                     if(row.appellation==="Ajouter"){
-                        console.log(row)
                         return(
-                            <div className="wineRow" style={{justifyContent:"center"}}>
+                            <div className="wineRow">
                                 <Button variant="secondary" size="sm" onClick={()=>alert("Nouvelle bouteille dans cave " + row.cellar + " Clayette " + row.shelf + " " +  row.position)}>Ajouter une bouteille</Button>                     
                             </div>
                             )
@@ -43,7 +42,7 @@ const caroussels={
                         }
                       return(
                           <div className="wineRow">
-                              <div style={{minWidth:"30px",minHeight:"30px",backgroundColor:"grey"}}>
+                              <div className="wineRowBottle">
                                 {tinyComponents.bottle(color,"","20px",row,onclick)}
                               </div>
                               
@@ -61,9 +60,10 @@ const caroussels={
 
         function cellar(array){
             return array.map((element,index)=>{
+                console.log(element)
                 return (
                     <div className="cellarDisplay" name={element.cellar} key={'cellar' + index}>
-                        {shelf(element.cellarContent,index)}
+                        {shelf(element.cellarContent,element.cellar)}
                     </div>
                 )
             })
@@ -71,24 +71,47 @@ const caroussels={
 
         function shelf(array,cellar){
             return array.map((element,index)=>{
-                let frontData=element.shelfContent[0].front;
-                frontData.push({
-                                appellation:"Ajouter",
-                                cellar:element.shelfContent[0].front[0].cellar,
-                                shelf:element.shelfContent[0].front[0].shelf,
-                                position:element.shelfContent[0].front[0].position});
-                let backData=element.shelfContent[0].back;
-                backData.push({
-                                appellation:"Ajouter",
-                                cellar:element.shelfContent[0].back[0].cellar,
-                                shelf:element.shelfContent[0].back[0].shelf,
-                                position:element.shelfContent[0].back[0].position});
-                let frontTitle=
-                "Clayette " + element.shelfContent[0].front[0].shelf +
-                " Avant";
-                let backtTitle=
-                "Clayette " + element.shelfContent[0].back[0].shelf +
-                " Arrière";
+                let [frontData,backData,frontTitle,backtTitle]=[[],[],"",""];
+                if(element.shelfContent[0].front){
+                    element.shelfContent[0].front.forEach(list => {
+                        frontData.push(list); 
+                    });                    
+                    frontData.push({
+                                    appellation:"Ajouter",
+                                    cellar:cellar,
+                                    shelf:element.shelf,
+                                    position:"front"
+                                });                               
+                    
+                }else{
+                    frontData.push({
+                        appellation:"Ajouter",
+                        cellar:cellar,
+                        shelf:element.shelf,
+                        position:"front"
+                    })
+                };
+                if(element.shelfContent[1].back){
+                    element.shelfContent[1].back.forEach(list => {
+                        backData.push(list); 
+                    }); 
+                    backData.push({
+                                    appellation:"Ajouter",
+                                    cellar:cellar,
+                                    shelf:element.shelf,
+                                    position:"back"
+                                });                    
+                }else{
+                    backData.push({
+                        appellation:"Ajouter",
+                        cellar:cellar,
+                        shelf:element.shelf,
+                        position:"back"
+                    })
+                };
+                frontTitle="Clayette " + element.shelf + " Avant";
+                backtTitle="Clayette " + element.shelf + " Arrière";               
+                
                 return (
                     <Card className="cellarDisplayShelf" key={cellar + 'shelf' + index} >
                         <Card className="cellarDisplayFrontShelf"><BootstrapTable keyField='id' data={ frontData } columns={ column(frontTitle) } /></Card>

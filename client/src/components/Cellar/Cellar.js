@@ -9,7 +9,8 @@ import fetchData from '../../lib/fetch'
 
 function Cellar(props) {
 
-
+    const [cellar,setCellar] = useState([]);
+    const [products,setProducts] = useState([]);
     /**
      * @useEffect
      */
@@ -23,8 +24,40 @@ function Cellar(props) {
     const getProduct=()=>{     
           fetchData("POST", "/api/cellar", {}, true).then(
               (result) => {
-                //console.log(result);          
-                  
+                //console.log(result.cellar);    
+                let [cellarList,shelfbyCellarList,productsList]=[[],[],[]];
+                result.cellar.forEach(element => {
+                  cellarList.push(element.cellar);
+                  shelfbyCellarList.push("Cave"+element.cellar+"Clayette"+element.shelf);
+                });
+                let uniqCellarList = [...new Set(cellarList.sort())];
+                let uniqShelfbyCellarList = [...new Set(shelfbyCellarList.sort())];                
+                uniqCellarList.forEach((cellar,cellarIndex)=>{
+                  productsList.push({"cellar":cellar,"cellarContent":[]})
+                  let nbShelf=0;
+                    uniqShelfbyCellarList.forEach(shelf=>{
+                      if(shelf.includes("Cave" + cellar)){
+                        nbShelf=+1;
+                        productsList[cellarIndex].cellarContent.push({"shelf":nbShelf, shelfContent:[{"front":[]},{"back":[]}]});
+                        result.cellar.forEach((element,index) => {
+                          if(element.cellar===cellar && element.shelf===nbShelf && element.position==="back"){
+                            productsList[cellarIndex].cellarContent.forEach(el=>{
+                              el.shelfContent[1].back.push(element)
+                            })
+                          };
+                          if(element.cellar===cellar && element.shelf===nbShelf && element.position==="front"){
+                            productsList[cellarIndex].cellarContent.forEach(el=>{
+                              el.shelfContent[0].front.push(element)
+                            });
+                          };
+                        });
+                      };                    
+                    });                  
+                });
+                setCellar(uniqCellarList);
+                setProducts(productsList);
+                console.log(productsList)
+
                 },
               (error) => {
                 console.error("An error has occured while fetching posts");
@@ -32,7 +65,8 @@ function Cellar(props) {
               }
             ); 
     };
-
+    //console.log(products);
+    //console.log(cellar);
     const cellarList=["Cave 1","Cave 2"];
     const products1 = [
       {
@@ -44,7 +78,7 @@ function Cellar(props) {
               {
                 front:[
                   {
-                    appellation: "CORTON CHARLEMAGNE rouge",
+                    appellation: "Corton Charlemagne",
                     bottleType: "BOUTEILLE 75CL",
                     cellar: 1,
                     color: "rouge",
@@ -66,10 +100,10 @@ function Cellar(props) {
                     shelf: 1,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea1",
                   },
                   {
-                    appellation: "CORTON CHARLEMAGNE rose",
+                    appellation: "CORTON CHARLEMAGNE",
                     bottleType: "BOUTEILLE 75CL",
                     cellar: 1,
                     color: "rose",
@@ -91,11 +125,11 @@ function Cellar(props) {
                     shelf: 1,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea2",
                   }
                 ],
                 back:[
-                  {
+                  /*{
                     appellation: "CORTON CHARLEMAGNE",
                     bottleType: "BOUTEILLE 75CL",
                     cellar: 1,
@@ -118,8 +152,8 @@ function Cellar(props) {
                     shelf: 1,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
-                  }
+                    _id: "60196e9bf0106f447ca01ea3",
+                  }*/
                 ],
               },
             ],
@@ -152,7 +186,7 @@ function Cellar(props) {
                     shelf: 2,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea4",
                   }
                 ],
                 back:[
@@ -179,7 +213,7 @@ function Cellar(props) {
                     shelf: 2,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea5",
                   }
                 ],
               },
@@ -219,11 +253,11 @@ function Cellar(props) {
                     shelf: 1,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea6",
                   }
                 ],
                 back:[
-                  {
+                  /*{
                     appellation: "CORTON CHARLEMAGNE",
                     bottleType: "BOUTEILLE 75CL",
                     cellar: 2,
@@ -246,8 +280,8 @@ function Cellar(props) {
                     shelf: 1,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
-                  }
+                    _id: "60196e9bf0106f447ca01ea7",
+                  }*/
                 ],
               },
             ],
@@ -280,7 +314,7 @@ function Cellar(props) {
                     shelf: 2,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea8",
                   }
                 ],
                 back:[
@@ -307,7 +341,7 @@ function Cellar(props) {
                     shelf: 2,
                     vintage: 2016,
                     winery: "MALDANT - PAUVELOT",
-                    _id: "60196e9bf0106f447ca01eaa",
+                    _id: "60196e9bf0106f447ca01ea9",
                   }
                 ],
               },
@@ -337,7 +371,7 @@ function Cellar(props) {
             </div>
             </div>            
             <div className="cellarCarousel">
-                {caroussel.cellar(cellarList,products1,onclick,cellarChoise)}
+                {caroussel.cellar(cellarList,products,onclick,cellarChoise)}
             </div>
         </div>
     );
