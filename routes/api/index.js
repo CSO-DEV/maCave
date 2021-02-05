@@ -13,6 +13,7 @@ const router = express.Router();
 const cellar = require("../../controllers/cellar");
 const connection = require("../../controllers/connection");
 const post = require("../../controllers/posts");
+const xlToJson = require('../../helpers/excelConverter');
 
 /**
  * Routes
@@ -26,4 +27,5 @@ router.post("/add", cellar.addProduct);
 router.post("/modify", cellar.modifyProduct);
 router.post("/posts", post.getPosts);
 
+router.post("/import", xlToJson.excelToJson);
 module.exports = router;

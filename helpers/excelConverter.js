@@ -1,0 +1,44 @@
+const excelToJson=require("convert-excel-to-json");
+
+const xlConverter = {
+    excelToJson: (req, res, next) => {
+        let importSourceFile="C:/CSO-DEV/Eddy/liste.xlsx"
+        const excelData=excelToJson({    
+            sourceFile:importSourceFile,
+            sheets:[{
+                name:"Données",
+                header:{
+                    rows:1
+                },
+                columnToKey:{
+                    A:"cellar",
+                    B:"shelf",
+                    c:"position",
+                    D:"registrationDate",
+                    E:"color",
+                    F:"region",
+                    G:"appellation",
+                    H:"vintge",
+                    I:"winery",
+                    J:"miniAppogee",
+                    K:"maxiAppogee",
+                    L:"grape",
+                    M:"purchasePrice",
+                    N:"purchasePlace",
+                    O:"sellingPrice",
+                    P:"score",
+                    Q:"comment",
+                    R:"picture",
+                    S:"deletionDate",
+                    T:"comsumptionDate",
+                    U:"bottleType",
+                    V:"organic",
+                }
+            }]
+        });
+        res.json({
+            converter: excelData,
+          });
+  }
+}
+  module.exports = xlConverter;
