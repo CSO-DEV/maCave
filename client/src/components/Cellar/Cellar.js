@@ -9,12 +9,14 @@ import caroussel from '../../assets/carousels';
 import fetchData from '../../lib/fetch'
 import dataControl from '../../lib/dataControl'
 
+
 function Cellar(props) {
 
     const [cellar,setCellar] = useState([]);
     const [productList,setProductList] = useState([]);
     const [redirectionLogout,setRedirectionLogout] = useState(false);
     const [name,setName] = useState('');
+    const [xlFile,setXlFile] = useState('');
 
     /**
      * @useEffect
@@ -88,23 +90,41 @@ function Cellar(props) {
           );            
       }; 
   };
-console.log(productList)
+
+  const importFile=(e)=>{
+    console.log(xlFile)
+    fetchData("POST", "/api/import", xlFile, true).then(
+      (data) => {
+          console.log(data)
+          },
+      (error) => {
+        console.error("An error has occured while fetching posts");
+      }
+  );
+  }
+
+
+
+
     return (
         <div className="cellarContainer"
         style={{backgroundImage:"url(images/cave.jpg)"}}
         >
           {logout()}
             <div className="topContainer">
-            <div className="cellarTitle">
-                <h1>Ma Cave à Vin</h1>
-                <div className="cellarDisconnectionButton">
-                    {tinyComponents.logOut(name, setRedirectionLogout)}
-                </div>
-            </div>
-            </div>            
+              <div className="cellarTitle">
+                  <h1>Ma Cave à Vin</h1>
+                  <div className="cellarDisconnectionButton">
+                      {tinyComponents.logOut(name, setRedirectionLogout)}
+                  </div>
+              </div>
+            </div>    
             <div className="cellarCarousel">
                 {caroussel.cellar(cellar,productList,onclick,cellarChoise)}
             </div>
+            <div>
+          
+            </div>    
         </div>
     );
 }

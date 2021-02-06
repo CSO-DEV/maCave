@@ -1,8 +1,10 @@
 const excelToJson=require("convert-excel-to-json");
-
+const path = require('path')
 const xlConverter = {
     excelToJson: (req, res, next) => {
-        let importSourceFile="C:/CSO-DEV/Eddy/liste.xlsx"
+        console.log(req.body.xlFile);
+        //let importSourceFile=req.body.xlFile;
+        let importSourceFile="C:/CSO-DEV/Eddy/liste.xlsx";
         const excelData=excelToJson({    
             sourceFile:importSourceFile,
             sheets:[{
@@ -38,6 +40,7 @@ const xlConverter = {
         });
         res.json({
             converter: excelData,
+            path: path.resolve(__dirname, "liste_1612619031951.xlsx"),
           });
   }
 }
