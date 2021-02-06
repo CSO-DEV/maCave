@@ -37,11 +37,11 @@ const xlConverter = {
                     V:"organic",
                 }
             }]
-        });
+        });*/
         res.json({
-            converter: excelData,
+            //converter: excelData,
             path: importSourceFile,
-          });*/
+          });
           fs.unlinkSync("/app/public/xlImport/liste_1612630005898.xlsx")
         //fs.unlinkSync(importSourceFile);
   }
