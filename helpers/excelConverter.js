@@ -5,7 +5,7 @@ const xlConverter = {
         console.log(req.body.xlFile);
         //let importSourceFile=req.body.xlFile;
         let importSourceFile="C:/CSO-DEV/Eddy/liste.xlsx";
-        const excelData=excelToJson({    
+        /*const excelData=excelToJson({    
             sourceFile:importSourceFile,
             sheets:[{
                 name:"Données",
@@ -37,9 +37,9 @@ const xlConverter = {
                     V:"organic",
                 }
             }]
-        });
+        });*/
         res.json({
-            converter: excelData,
+            //converter: excelData,
             path: path.resolve(__dirname, "liste_1612619031951.xlsx"),
           });
   }
