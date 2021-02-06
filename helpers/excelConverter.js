@@ -5,7 +5,7 @@ const fs = require('fs');
 const xlConverter = {
     excelToJson: (req, res, next) => {
         let importSourceFile=path.resolve(__dirname, '../public/xlImport',req.files.xlFile[0].filename);
-        /*const excelData=excelToJson({    
+        const excelData=excelToJson({    
             sourceFile:importSourceFile,
             sheets:[{
                 name:"Données",
@@ -37,13 +37,21 @@ const xlConverter = {
                     V:"organic",
                 }
             }]
-        });*/
+        });
+        
+
+
+
+
+
+
+
         res.json({
-            //converter: excelData,
+            converter: excelData,
             path: importSourceFile,
           });
-          fs.unlinkSync("/app/public/xlImport/liste_1612630005898.xlsx")
-        //fs.unlinkSync(importSourceFile);
+          //fs.unlinkSync("/app/public/xlImport/liste_1612630005898.xlsx")
+        fs.unlinkSync(importSourceFile);
   }
 }
   module.exports = xlConverter;
