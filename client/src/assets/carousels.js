@@ -47,7 +47,7 @@ const caroussels={
                               </div>
                               
                               <div className="wineRowText">                     
-                                      <span className="wineRowCalled">{row.appellation}</span>
+                                      <span className="wineRowCalled">{row.winery}</span>
                                       <span className="wineRowVintage">{row.vintage}</span>                       
                               </div>                                    
                           </div>
