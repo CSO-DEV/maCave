@@ -104,7 +104,7 @@ function Cellar(props) {
   const dataHandler=(e)=>{
     e.preventDefault();
     let formData = new FormData(e.target);    
-    fetchData.fetchDataForm("POST", "/api/import", formData, false).then(
+    fetchData.fetchDataForm("POST", "/api/import", formData, true).then(
       (data) => {
           console.log(data)
           },
@@ -140,6 +140,7 @@ function Cellar(props) {
                 placeholder="Nom de la Société..."
                 required
               />
+              <input style={{display:"none"}}name="_Id" defaultValue={localStorage.getItem("_IdMaCaveAVin")}></input>
                 <input
                 type="file"
                 name="xlFile"

@@ -22,16 +22,17 @@ const dataControl = {
                 productsList[cellarIndex].cellarContent.push({"shelf":nbShelf, shelfContent:[{"front":[]},{"back":[]}]});
              
                 data.cellar.forEach((element,index) => {  
+                  if(!element.consumptionDate && !element.deletionDate){
+                    if(shelf==="Cave"+element.cellar+"Clayette"+element.shelf && element.position==="back"){ 
+                      
+                      productsList[cellarIndex].cellarContent[shelfIndex].shelfContent[1]["back"].push(element);
+                    };
+                    if(shelf==="Cave"+element.cellar+"Clayette"+element.shelf && element.position==="front"){
+                      productsList[cellarIndex].cellarContent[shelfIndex].shelfContent[0]["front"].push(element);
+                      if(element.shelf===1){console.log(element)}
+                    };
+                  };                
 
-                  if(shelf==="Cave"+element.cellar+"Clayette"+element.shelf && element.position==="back"){ 
-                    console.log(element);
-                    console.log(productsList[cellarIndex].cellarContent[shelfIndex].shelfContent[1]["back"])
-                    productsList[cellarIndex].cellarContent[shelfIndex].shelfContent[1]["back"].push(element)
-                  };
-                  if(shelf==="Cave"+element.cellar+"Clayette"+element.shelf && element.position==="front"){
-                    productsList[cellarIndex].cellarContent[shelfIndex].shelfContent[0]["front"].push(element)
-                  
-                  };
                 });
               };                    
             });                  

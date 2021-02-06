@@ -12,6 +12,7 @@ import config from "../config/config.json";
  * @param auth  : indique si identification * indicates whether identification
  */
 const fetchFromApi = {
+
   fetchData(verb, path, data, auth = false){
   const urlApp=process.env.NODE_ENV === 'production'? config.urlProd : config.urlLocal;
   const headers = new Headers({
@@ -52,19 +53,17 @@ const fetchFromApi = {
     }
   });
   },
-  fetchDataForm(verb,path,formData,auth=false){
+  fetchDataForm(verb,path,formData,auth=true){
       const urlApp=process.env.NODE_ENV === 'production'? config.urlProd : config.urlLocal;
       const options = {
+      headers: {authorization:localStorage.getItem("tokenMaCaveAVin")},
       method: verb,
       mode: "cors",
       body: formData, //JSON.stringify(body),
       };
-      if (auth && !formData._Id) {
-        formData._Id = localStorage.getItem("_IdMaCaveAVin"); 
-      };
+      let params="?id=" +localStorage.getItem("_IdMaCaveAVin")
 //Envoie de la requete inscription
-
-    return fetch(urlApp + path, options)
+    return fetch(urlApp + path + params, options)
     .then((response) => {
       if (
         response.status === 200 ||

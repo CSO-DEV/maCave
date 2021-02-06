@@ -13,7 +13,7 @@ const router = express.Router();
 const cellar = require("../../controllers/cellar");
 const connection = require("../../controllers/connection");
 const post = require("../../controllers/posts");
-const xlToJson = require('../../helpers/excelConverter');
+const xlToJson = require('../../controllers/excelConverter');
 const multer=require('../../middlewares/multer')
 
 /**
