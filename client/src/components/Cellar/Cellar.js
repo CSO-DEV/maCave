@@ -92,7 +92,7 @@ function Cellar(props) {
   };
 
   const importFile=(e)=>{
-    console.log(xlFile)
+    console.log({xlFile:"test"})
     fetchData("POST", "/api/import", xlFile, true).then(
       (data) => {
           console.log(data)
@@ -123,7 +123,7 @@ function Cellar(props) {
                 {caroussel.cellar(cellar,productList,onclick,cellarChoise)}
             </div>
             <div>
-          
+            <button onClick={()=>importFile()}></button>
             </div>    
         </div>
     );
