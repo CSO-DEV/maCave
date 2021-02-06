@@ -92,8 +92,7 @@ function Cellar(props) {
   };
 
   const importFile=(e)=>{
-    console.log({xlFile:"test"})
-    fetchData("POST", "/api/import", xlFile, true).then(
+    fetchData("POST", "/api/import", {xlFile:"test"}, true).then(
       (data) => {
           console.log(data)
           },
