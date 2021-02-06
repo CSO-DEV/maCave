@@ -14,6 +14,7 @@ const cellar = require("../../controllers/cellar");
 const connection = require("../../controllers/connection");
 const post = require("../../controllers/posts");
 const xlToJson = require('../../helpers/excelConverter');
+const multer=require('../../middlewares/multer')
 
 /**
  * Routes
@@ -27,5 +28,5 @@ router.post("/add", cellar.addProduct);
 router.post("/modify", cellar.modifyProduct);
 router.post("/posts", post.getPosts);
 
-router.post("/import", xlToJson.excelToJson);
+router.post("/import",multer, xlToJson.excelToJson);
 module.exports = router;

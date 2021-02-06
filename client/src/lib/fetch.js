@@ -11,7 +11,8 @@ import config from "../config/config.json";
  * @param data  : indique les données à transmettre * indicates data to be transmitted
  * @param auth  : indique si identification * indicates whether identification
  */
-const fetchFromApi = (verb, path, data, auth = false) => {
+const fetchFromApi = {
+  fetchData(verb, path, data, auth = false){
   const urlApp=process.env.NODE_ENV === 'production'? config.urlProd : config.urlLocal;
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -50,5 +51,37 @@ const fetchFromApi = (verb, path, data, auth = false) => {
       });
     }
   });
+  },
+  fetchDataForm(verb,path,formData,auth=false){
+      const urlApp=process.env.NODE_ENV === 'production'? config.urlProd : config.urlLocal;
+      const options = {
+      method: verb,
+      mode: "cors",
+      body: formData, //JSON.stringify(body),
+      };
+      if (auth && !formData._Id) {
+        formData._Id = localStorage.getItem("_IdMaCaveAVin"); 
+      };
+//Envoie de la requete inscription
+
+    return fetch(urlApp + path, options)
+    .then((response) => {
+      if (
+        response.status === 200 ||
+        response.status === 301 ||
+        response.status === 302
+      ) {
+        return response.json();
+      } else if (response.status === 401) {
+        return new Promise((resolve, reject) => {
+          reject({ error: true, logout: true, message:response.status });
+        });
+      } else {
+        return new Promise((resolve, reject) => {
+          reject({ error: true , message:response.status});
+        });
+      }
+    });
+  }
 };
 export default fetchFromApi;

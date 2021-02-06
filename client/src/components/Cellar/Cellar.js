@@ -29,7 +29,7 @@ function Cellar(props) {
      *@method getProduct :
      */
     const getProduct=()=>{     
-          fetchData("POST", "/api/cellar", {}, true).then(
+          fetchData.fetchData("POST", "/api/cellar", {}, true).then(
               (result) => {
                 setName(result.name);
                 if(result.cellar.length===0){
@@ -75,7 +75,7 @@ function Cellar(props) {
      */    
     const logout = () =>{
       if(redirectionLogout){
-          fetchData("POST", "/api/signOut", {}, true).then(
+          fetchData.fetchData("POST", "/api/signOut", {}, true).then(
               (data) => {
                   console.log(data)
                   },
@@ -99,11 +99,20 @@ function Cellar(props) {
       (error) => {
         console.error("An error has occured while fetching posts");
       }
-  );
+    );
   }
-
-
-
+  const dataHandler=(e)=>{
+    e.preventDefault();
+    let formData = new FormData(e.target);    
+    fetchData.fetchDataForm("POST", "/api/import", formData, false).then(
+      (data) => {
+          console.log(data)
+          },
+      (error) => {
+        console.error("An error has occured while fetching posts");
+      }
+    );
+  }
 
     return (
         <div className="cellarContainer"
@@ -122,7 +131,31 @@ function Cellar(props) {
                 {caroussel.cellar(cellar,productList,onclick,cellarChoise)}
             </div>
             <div>
-            <button onClick={()=>importFile()}></button>
+              
+
+            <form className="containtFormulaire" onSubmit={(e)=>dataHandler(e)}>
+                <input
+                type="text"
+                name="compagnyName"
+                placeholder="Nom de la Société..."
+                required
+              />
+                <input
+                type="file"
+                name="xlFile"
+                placeholder="Societé..."
+              />
+                          <input
+              type="submit"
+              value="Confirmer"
+              id="submit_but"
+            />
+              </form>
+
+
+
+
+
             </div>    
         </div>
     );

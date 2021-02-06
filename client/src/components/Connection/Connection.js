@@ -138,7 +138,7 @@ function Connection(props) {
      * @param dataToApi : Données à transmettre a l'api * data to send to Api
      */
     const fetchToApi=(fetchRouter,dataToApi)=>{
-        fetchData("POST", "/api/" + fetchRouter, dataToApi, true).then(
+        fetchData.fetchData("POST", "/api/" + fetchRouter, dataToApi, true).then(
             (dataFromApi) => {
                 localStorage.setItem('_IdMaCaveAVin',dataFromApi.cellar);
                 localStorage.setItem('tokenMaCaveAVin',dataFromApi.token);
