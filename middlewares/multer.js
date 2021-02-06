@@ -9,7 +9,7 @@ const MIME_TYPE = {
 };
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "public/tmp");
+    callback(null, "public/xlImport");
   },
   filename: (req, file, callback) => {
     const name = file.originalname

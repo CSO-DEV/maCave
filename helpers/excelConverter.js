@@ -5,7 +5,7 @@ const xlConverter = {
     excelToJson: (req, res, next) => {
         console.log("req.body.xlFile");
         console.log(req.files.xlFile[0].filename);
-        let importSourceFile=path.resolve(__dirname, '../public/tmp',req.files.xlFile[0].filename);
+        let importSourceFile=path.resolve(__dirname, '../public/xlImport',req.files.xlFile[0].filename);
         const excelData=excelToJson({    
             sourceFile:importSourceFile,
             sheets:[{
