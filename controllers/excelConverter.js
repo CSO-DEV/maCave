@@ -8,7 +8,7 @@ const moment=require("moment")
 
 const xlConverter = {
     excelToJson: (req, res, next) => {
-        let importSourceFile=path.resolve(__dirname, '../public/xlImport',req.files.xlFile[0].filename);
+        let importSourceFile=path.resolve(__dirname, '../public',req.files.xlFile[0].filename);
         const excelData=excelToJson({    
             sourceFile:importSourceFile,
             sheets:[{
@@ -50,7 +50,7 @@ const xlConverter = {
             data.shelf=parseInt(element.shelf);
             element.cellar ? data.cellar=parseInt(element.cellar) : data.cellar=null;
             element.shelf ? data.shelf=parseInt(element.shelf) : data.shelf=null;
-            element.position ? data.position=element.position.toLowerCase() : data.position="front";
+            element.position ? data.position=element.position : data.position="Avant";
             element.registrationDate ? data.registrationDate=moment(element.registrationDate).format("DD/MM/YYYY").toString() : data.registrationDate=null;
             element.color ? data.color=element.color.toLowerCase() : data.color=null;
             element.region ? data.region=element.region.toString() : data.region=null;

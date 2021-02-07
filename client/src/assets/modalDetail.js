@@ -8,38 +8,30 @@ import tinyComponents from './tinyComponents'
 
 const modalDetail={
 
-    bottleDetail(row,toggledModal,modalControl,handleClose){
-        let position;
-        if(row.position==="front"){
-            position=" Avant"
-        }else{
-            position=" Arrière"};
+    bottleDetail(row,toggledModal,modalControl,handleClose,handleData){
         const HeaderTitle=  "Cave" + row.cellar.toString() + 
-                            " Clayette "  + row.shelf.toString() + position 
+                            " Clayette "  + row.shelf.toString() + row.position 
         const buttonType="Annuler/Enregistrer";
         const modalButton=()=>{
             return String(buttonType)
             .split("/")
             .map((element,index)=>{
               return(
-                <Button
+                 <Button
                 key={"modalButton" + index}
                 className="btn-secondary"
                 variant="dark"
                 onClick={()=>handleClose(index+2)}
-                >{element}</Button>
+                >{element}</Button>              
               )
             })
         };
         const body=()=>{
-            function handleData(e){
-                console.log(e.target.value);
-            }
             return(
-                <div >
+                <div>
                     {tinyComponents.input("Cave :","","","cellar","text","cellar","",true,"none","",handleData,row.cellar)}
                     {tinyComponents.input("Clayette :","","","shelf","text","shelf","",true,"none","",handleData,row.shelf)}
-                    {tinyComponents.input("Position :","","","position","text","position","",true,"none","",handleData,position)}
+                    {tinyComponents.input("Position :","","","position","text","position","",true,"none","",handleData,row.position)}
                     {tinyComponents.input("Couleur :","","","color","text","color","",true,"none","",handleData,row.color)}
                     {tinyComponents.input("Région :","","","region","text","region","",true,"none","",handleData,row.region)}
                     {tinyComponents.input("Appellation :","","","appellation","text","appellation","",true,"none","",handleData,row.appellation)}
@@ -54,8 +46,8 @@ const modalDetail={
                     {tinyComponents.input("Notation :","","","score","text","score","",true,"none","",handleData,row.score)}
                     {tinyComponents.input("Commentaire :","","","comment","text","comment","",true,"none","",handleData,row.comment)}
                     {tinyComponents.input("Photo :","","","picture","text","picture","",true,"none","",handleData,row.picture)}
-                    {tinyComponents.input("Type de bouteille :","","","bottleType","text","bottleType","",true,"none","",handleData,row.bottleType)}
-                    {tinyComponents.checkBox("Bio ? :","","","organic",handleData,row.organic)}
+                    {tinyComponents.input("Bouteille :","","","bottleType","text","bottleType","",true,"none","",handleData,row.bottleType)}
+                    {tinyComponents.checkBox("Bio ? :","","","organic","organic",handleData,row.organic)}
                 </div>
             )
         };
@@ -63,6 +55,7 @@ const modalDetail={
         return tinyComponents.modal(
             toggledModal,
             modalControl,
+            handleClose,
             HeaderTitle,
             modalButton,
             body

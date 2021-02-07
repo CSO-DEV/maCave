@@ -72,15 +72,15 @@ const caroussels={
         function shelf(array,cellar){
             return array.map((element,index)=>{
                 let [frontData,backData,frontTitle,backtTitle]=[[],[],"",""];
-                if(element.shelfContent[0].front){
-                    element.shelfContent[0].front.forEach(list => {
+                if(element.shelfContent[0].avant){
+                    element.shelfContent[0].avant.forEach(list => {
                         frontData.push(list); 
                     });                    
                     frontData.push({
                                     appellation:"Ajouter",
                                     cellar:cellar,
                                     shelf:element.shelf,
-                                    position:"front"
+                                    position:"Avant"
                                 });                               
                     
                 }else{
@@ -88,25 +88,25 @@ const caroussels={
                         appellation:"Ajouter",
                         cellar:cellar,
                         shelf:element.shelf,
-                        position:"front"
+                        position:"Avant"
                     })
                 };
-                if(element.shelfContent[1].back){
-                    element.shelfContent[1].back.forEach(list => {
+                if(element.shelfContent[1].arriere){
+                    element.shelfContent[1].arriere.forEach(list => {
                         backData.push(list); 
                     }); 
                     backData.push({
                                     appellation:"Ajouter",
                                     cellar:cellar,
                                     shelf:element.shelf,
-                                    position:"back"
+                                    position:"Arrière"
                                 });                    
                 }else{
                     backData.push({
                         appellation:"Ajouter",
                         cellar:cellar,
                         shelf:element.shelf,
-                        position:"back"
+                        position:"Arrière"
                     })
                 };
                 frontTitle="Clayette " + element.shelf + " Avant";
@@ -125,7 +125,6 @@ const caroussels={
             <>
             <div className="cellarCarouselheader">
                 {tinyComponents.filter(cellarList,cellarChoise,"Cave ")}
-                <button>test</button>   
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
                 <div style={{display: "flex"}}>

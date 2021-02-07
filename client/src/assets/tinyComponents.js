@@ -8,19 +8,21 @@
 
 
  const tinyComponents={
-     modal(toggledModal,
+     modal(
+        toggledModal,
         modalControl,
+        handleClose,
         HeaderTitle,
         modalButton,
         body){
     
         return (
             <>     
-              <Modal show={toggledModal} onHide={()=>modalControl(false)}>
+              <Modal show={toggledModal} onHide={()=>handleClose(1)}>
                 <Modal.Header closeButton>
                   <Modal.Title>{HeaderTitle}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{body()}</Modal.Body>
+                <Modal.Body style={{maxHeight:"60vh",overflow:"hidden",overflowY:"auto"}}>{body()}</Modal.Body>
                 <Modal.Footer>
                     {modalButton()}
                 </Modal.Footer>
@@ -31,7 +33,7 @@
      /**
       * @method input : Mini composant champ de saisie * Mini component input field
       * @param labelClass : nom de la classe de l'étiquette * Label classname 
-      * @param inputClass : nom de la classe du champ de saisie * input field classname 
+      * @param inputWidth : largeur du champ de saisie * input field width 
       * @param label : Libellé de l'étiquette * Label wording
       * @param id  : Libellé de l'id * Id wording
       * @param type  : Type de champ de saisie * input field type
@@ -40,13 +42,19 @@
       * @param required  : Champ requis true / false * required field true/false
       * @param onchange  : Action sur changement * Action on change
       */
-     input(label,labelClass,inputClass,id,type,name,placeholder,required,maxLength,title,onchange,value){
+     input(label,labelWidth,inputWidth,id,type,name,placeholder,required,maxLength,title,onchange,value){
          return(
              <div className="tinyInput">
-                <label className={labelClass} htmlFor={id}>{label}</label>
+                <label 
+                style={{
+                    width:labelWidth
+                }}
+                 htmlFor={id}>{label}</label>
                 <input
                 id={id}
-                className={inputClass}
+                style={{
+                    width:inputWidth
+                }}
                 type={type} 
                 name={name} 
                 placeholder={placeholder}
@@ -67,13 +75,14 @@
       * @param id 
       * @param onchange 
       */
-     checkBox(label,labelClass,inputClass,id,onchange,value){
+     checkBox(label,labelClass,inputClass,id,name,onchange,value){
          return(
              <div className="tinyCheckBox">
                  <label className={labelClass} htmlFor={id}>{label}</label>
                  <input 
                  id={id}
                  className={inputClass}
+                 name={name}
                  type="checkbox"
                  value={value}
                  onChange={onchange}
@@ -122,7 +131,10 @@
         }
          if(row){
             return(
-                <div>
+                <div style={{
+                    width:size,
+                    height:size,
+                }}>
                     <button className="tinyBottle"
                     onClick={()=>{
                         handleRowData(row);
