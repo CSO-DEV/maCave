@@ -1,0 +1,72 @@
+/**
+ * modalDetail.js : contenu des modales *
+ */
+import {Form,Modal,Button} from 'react-bootstrap'
+import './style.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import tinyComponents from './tinyComponents'
+
+const modalDetail={
+
+    bottleDetail(row,toggledModal,modalControl,handleClose){
+        let position;
+        if(row.position==="front"){
+            position=" Avant"
+        }else{
+            position=" Arrière"};
+        const HeaderTitle=  "Cave" + row.cellar.toString() + 
+                            " Clayette "  + row.shelf.toString() + position 
+        const buttonType="Annuler/Enregistrer";
+        const modalButton=()=>{
+            return String(buttonType)
+            .split("/")
+            .map((element,index)=>{
+              return(
+                <Button
+                key={"modalButton" + index}
+                className="btn-secondary"
+                variant="dark"
+                onClick={()=>handleClose(index+2)}
+                >{element}</Button>
+              )
+            })
+        };
+        const body=()=>{
+            function handleData(e){
+                console.log(e.target.value);
+            }
+            return(
+                <div >
+                    {tinyComponents.input("Cave :","","","cellar","text","cellar","",true,"none","",handleData,row.cellar)}
+                    {tinyComponents.input("Clayette :","","","shelf","text","shelf","",true,"none","",handleData,row.shelf)}
+                    {tinyComponents.input("Position :","","","position","text","position","",true,"none","",handleData,position)}
+                    {tinyComponents.input("Couleur :","","","color","text","color","",true,"none","",handleData,row.color)}
+                    {tinyComponents.input("Région :","","","region","text","region","",true,"none","",handleData,row.region)}
+                    {tinyComponents.input("Appellation :","","","appellation","text","appellation","",true,"none","",handleData,row.appellation)}
+                    {tinyComponents.input("Millésime :","","","vintage","text","vintage","",true,"none","",handleData,row.vintage)}
+                    {tinyComponents.input("Domaine :","","","winery","text","winery","",true,"none","",handleData,row.winery)}
+                    {tinyComponents.input("Appogée mini :","","","miniAppogee","text","miniAppogee","",true,"none","",handleData,row.miniAppogee)}
+                    {tinyComponents.input("Appogée maxi :","","","maxiAppogee","text","maxiAppogee","",true,"none","",handleData,row.maxiAppogee)}
+                    {tinyComponents.input("Cèpage :","","","grape","text","grape","",true,"none","",handleData,row.grape)}
+                    {tinyComponents.input("Prix d'achat :","","","purchasePrice","text","purchasePrice","",true,"none","",handleData,row.purchasePrice)}
+                    {tinyComponents.input("Lieu d'achat :","","","purchasePlace","text","purchasePlace","",true,"none","",handleData,row.purchasePlace)}
+                    {tinyComponents.input("Prix de vente :","","","sellingPrice","text","sellingPrice","",true,"none","",handleData,row.sellingPrice)}
+                    {tinyComponents.input("Notation :","","","score","text","score","",true,"none","",handleData,row.score)}
+                    {tinyComponents.input("Commentaire :","","","comment","text","comment","",true,"none","",handleData,row.comment)}
+                    {tinyComponents.input("Photo :","","","picture","text","picture","",true,"none","",handleData,row.picture)}
+                    {tinyComponents.input("Type de bouteille :","","","bottleType","text","bottleType","",true,"none","",handleData,row.bottleType)}
+                    {tinyComponents.checkBox("Bio ? :","","","organic",handleData,row.organic)}
+                </div>
+            )
+        };
+        
+        return tinyComponents.modal(
+            toggledModal,
+            modalControl,
+            HeaderTitle,
+            modalButton,
+            body
+            )
+        }    
+}
+export default modalDetail;

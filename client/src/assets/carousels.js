@@ -12,8 +12,18 @@ import tinyComponents from './tinyComponents';
 
 const caroussels={
 
-    cellar(cellarList,products,onclick,cellarChoise){        
-        
+    /**
+     * @method cellar : Affichage des caves * cellar display
+     * @param cellarList : Liste des caves * cellar list
+     * @param products : Liste des produits * products list
+     * @param onclick  : Commande sur selection d'une bouteille * 
+     * @param cellarChoise : Choix de la cave à afficher *
+     */
+    cellar(cellarList,products,handleRowData,cellarChoise,modalControl){      
+        /**
+         * @function column : Configuration des colonnes * column configuration
+         * @param title : Titre des tableaux * tables title
+         */
         function column(title){
             const column = [{
                 dataField: 'id',
@@ -30,20 +40,11 @@ const caroussels={
                             </div>
                             )
                     }else{
-                        let color;
-                        if(row.color==="rouge"){
-                            color="#800000"
-                        }else if (row.color==="rose"){
-                            color="#F8CBAD"
-                        }else if (row.color==="blanc"){
-                            color="#FFF2CC"
-                        }else{
-                            color="#E7E6E6"
-                        }
+                        console.log(row)
                       return(
                           <div className="wineRow">
                               <div className="wineRowBottle">
-                                {tinyComponents.bottle(color,"","20px",row,onclick)}
+                                {tinyComponents.bottle(row.color,"","20px",row,handleRowData,modalControl)}
                               </div>
                               
                               <div className="wineRowText">                     
