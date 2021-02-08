@@ -143,7 +143,7 @@ function Connection(props) {
                 localStorage.setItem('_IdMaCaveAVin',dataFromApi.cellar);
                 localStorage.setItem('tokenMaCaveAVin',dataFromApi.token);
                 if(fetchRouter==="signIn"){
-                    alert('connexion réussie')
+                    //alert('connexion réussie')
                 }else{
                     alert("Félicitation, vous venez d'ouvrir un compte ! Veuillez vous connecter")
                 }

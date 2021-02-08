@@ -16,8 +16,8 @@
         body){
     
         return (
-            <>     
-              <Modal show={toggledModal} onHide={()=>handleClose(1)}>
+            <div className="modal">     
+              <Modal show={toggledModal} onHide={()=>handleClose(1) }>
                 <Modal.Header closeButton>
                   <Modal.Title>{HeaderTitle}</Modal.Title>
                 </Modal.Header>
@@ -26,7 +26,7 @@
                     {modalButton()}
                 </Modal.Footer>
               </Modal>
-            </>
+            </div>
           );
      },
      /**

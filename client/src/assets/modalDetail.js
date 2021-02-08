@@ -81,6 +81,7 @@ const modalDetail={
             .map((element,index)=>{
             return(
             <Button
+            size="sm"
             key={"modalButton" + index}
             className="btn-secondary"
             variant="dark"
