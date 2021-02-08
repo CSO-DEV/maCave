@@ -184,8 +184,28 @@ function Cellar(props) {
             productList[index]=rowData;
             return
           }
+        });
+        productByCellarList.forEach(cellarElement=>{
+          if(cellarElement.cellar===rowData.cellar){
+            cellarElement.cellarContent.forEach(shelfElement=>{
+              if(shelfElement.shelf===rowData.shelf){
+                shelfElement.shelfContent.forEach(positionElement=>{
+                  let position;
+                  if(rowData.position==="Avant"){position="avant"}else{position="arriere"};
+                  if(positionElement[position]){
+                    positionElement[position].forEach(element=>{
+                      if(element._id===rowData._id){
+                        element=rowData
+                      }
+                    })
+                  }                
+                })
+              }
+            })
+          }
         })
         fetchToApi("modify",productList);
+        setProductByCellarList(productByCellarList)
         setToggledModal(false);
         getProduct();       
       };      
@@ -212,7 +232,7 @@ function Cellar(props) {
         <div className="cellarCarousel">
             {caroussel.cellar(cellar,productByCellarList,handleRowData,cellarChoise,modalControl)}
         </div>
-        <div className="importConatiner" style={{display:"flex",backgroundColor:"blue",position: "fixed",top: "81px"}}>
+        <div className="importConatiner" style={{display:"none",backgroundColor:"blue",position: "fixed",top: "81px"}}>
             <form className="containtFormulaire" onSubmit={(e)=>importXlFile(e)}>
               <input
               type="file"
