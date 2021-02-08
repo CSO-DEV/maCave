@@ -111,6 +111,7 @@ function Cellar(props) {
     fetchData.fetchData("POST", "/api/" + fetchRouter, {product:dataToApi}, true).then(
         (dataFromApi) => {
           console.log("ok");
+          getProduct()
         },
         (error) => {
          console.log(error)
@@ -206,8 +207,7 @@ function Cellar(props) {
         });
         setProductByCellarList(productByCellarList);
         fetchToApi("modify",productList);       
-        setToggledModal(false);
-        getProduct();       
+        setToggledModal(false);  
       };      
     };
   };
