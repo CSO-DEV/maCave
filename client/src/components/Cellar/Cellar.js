@@ -46,6 +46,7 @@ function Cellar(props) {
                 setCellar(umptyData[0]);
                 setProductByCellarList(umptyData[1]);
               }else{
+                alert('test')
                 let fullData=dataControl.productList(result);
                 setCellar(fullData[0]);
                 setProductByCellarList(fullData[1]);
