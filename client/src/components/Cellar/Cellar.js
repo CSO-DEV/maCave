@@ -22,8 +22,10 @@ function Cellar(props) {
   const [redirectionLogout,setRedirectionLogout] = useState(false);
 
   const [toggledModal,setToggledModal]=useState(false);
-  const [modalType,setModalType]=useState();
   const [rowData,setRowData]=useState({});
+
+  const [toggledAlertModal,setToggledAlertModal]=useState(false);
+  const [modalType,setModalType]=useState();
 
 
   /**
@@ -170,7 +172,7 @@ function Cellar(props) {
    */
   const bottleDetailModal=(toggledModal)=>{
     if(toggledModal){      
-      return modal.bottleDetail(rowData,toggledModal,modalControl,handleClose,handleData)
+      return modal.bottleDetail(rowData,toggledModal,handleClose,handleData)
     };
     /**
      * @function handleClose : Commande de fermeture de la modale *
@@ -179,36 +181,43 @@ function Cellar(props) {
     function handleClose(value){
       if(value<=2){
         setToggledModal(false);
-      }else{
-        productList.forEach((element,index)=>{
-          if(element._id===rowData._id){
-            productList[index]=rowData;
-            return
-          }
-        });
-        productByCellarList.forEach(cellarElement=>{
-          if(cellarElement.cellar===rowData.cellar){
-            cellarElement.cellarContent.forEach(shelfElement=>{
-              if(shelfElement.shelf===rowData.shelf){
-                shelfElement.shelfContent.forEach(positionElement=>{
-                  let position;
-                  if(rowData.position==="Avant"){position="avant"}else{position="arriere"};
-                  if(positionElement[position]){
-                    positionElement[position].forEach(element=>{
-                      if(element._id===rowData._id){
-                        element=rowData
-                      }
-                    })
-                  }                
-                })
-              }
-            })
-          }
-        });
-        setProductByCellarList(productByCellarList);
-        fetchToApi("modify",productList);       
+      }else if(value===3){
+        let data=dataControl.modifyData(productList,productByCellarList,rowData);
+        setProductByCellarList(data[1]);
+        fetchToApi("modify",data[0]);       
         setToggledModal(false);  
-      };      
+      }else if(value===4){
+        setModalType("consommer");
+        setToggledAlertModal(true);
+      }else{
+        setModalType("supprimer");
+        setToggledAlertModal(true);
+      }    
+    };
+  };
+
+/**
+ * @function alertModal : Lance et gère la modale d'alerte *
+ * @param toggledAlertModal : Etat d'affichage de la modale d'alerte *
+ */
+  const alertModal=(toggledAlertModal)=>{
+    if(toggledAlertModal){      
+      return modal.alert(rowData,toggledAlertModal,handleClose,modalType)
+    };
+    /**
+     * @function handleClose : Commande de fermeture de la modale *
+     * @param value : Valeur attribuée pour chaque action à lancer *
+     */
+    function handleClose(value){
+      if(value<=2){
+        setToggledAlertModal(false);
+      }else if(modalType==="supprimer"){
+        alert('lancer la commande supprimer');
+        setToggledAlertModal(false);
+      }else if(modalType==="consommer"){
+        alert('lancer la commande consommer');
+        setToggledAlertModal(false);
+      };
     };
   };
 
@@ -218,6 +227,8 @@ function Cellar(props) {
       >
         {logout()}
         {bottleDetailModal(toggledModal)}
+        {alertModal(toggledAlertModal)}
+
         <div className="topContainer">
           <div className="cellarTitle">
             <h1 style={{fontSize:"30px"}}>Ma Cave à Vin</h1>

@@ -112,16 +112,16 @@ function Connection(props) {
             <div>                
                 {type==="signIn" ?                
                     <div className="connectionSignIn">                
-                        {tinyComponents.input("Email :","","","signInEmail","email","signInEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
-                        {tinyComponents.input("Mot de passe :","","","signInPwd","password","signInPwd","",true,10,InputPwdTitle,dataholder)}
-                        {tinyComponents.checkBox("Mot de passe oublié","","","forgotten",dataholder)}
+                        {tinyComponents.input("Email :",{},{},"signInEmail","email","signInEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
+                        {tinyComponents.input("Mot de passe :",{},{},"signInPwd","password","signInPwd","",true,10,InputPwdTitle,dataholder)}
+                        {tinyComponents.checkBox("Mot de passe oublié",{},{},"forgotten",dataholder)}
                     </div>
                     :
                     <div className="connectionRegister">                
-                        {tinyComponents.input("Nom :","","","lastname","lastname","lastname","",true,"none","",dataholder)}
-                        {tinyComponents.input("Prénom :","","","firstname","firstname","firstname","",true,"none","",dataholder)}
-                        {tinyComponents.input("Email :","","","registerEmail","email","registerEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
-                        {tinyComponents.input("Mot de passe :","","","registerPwd","password","registerPwd","",true,10,InputPwdTitle,dataholder)}
+                        {tinyComponents.input("Nom :",{},{},"lastname","lastname","lastname","",true,"none","",dataholder)}
+                        {tinyComponents.input("Prénom :",{},{},"firstname","firstname","firstname","",true,"none","",dataholder)}
+                        {tinyComponents.input("Email :",{},{},"registerEmail","email","registerEmail","mail@serveur.com",true,"none",InputEmailTitle,dataholder)}
+                        {tinyComponents.input("Mot de passe :",{},{},"registerPwd","password","registerPwd","",true,10,InputPwdTitle,dataholder)}
                 </div>
                 } 
                 <Button className='connectionButton'

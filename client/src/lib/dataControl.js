@@ -56,7 +56,36 @@ const dataControl = {
       
         }]
     ]
-    }   
+    },
+    
+    modifyData(productList,productByCellarList,rowData){
+      productList.forEach((element,index)=>{
+        if(element._id===rowData._id){
+          productList[index]=rowData;
+          return
+        }
+      });
+      productByCellarList.forEach(cellarElement=>{
+        if(cellarElement.cellar===rowData.cellar){
+          cellarElement.cellarContent.forEach(shelfElement=>{
+            if(shelfElement.shelf===rowData.shelf){
+              shelfElement.shelfContent.forEach(positionElement=>{
+                let position;
+                if(rowData.position==="Avant"){position="avant"}else{position="arriere"};
+                if(positionElement[position]){
+                  positionElement[position].forEach(element=>{
+                    if(element._id===rowData._id){
+                      element=rowData
+                    }
+                  })
+                }                
+              })
+            }
+          })
+        }
+      });
+      return[productList,productByCellarList]
+    }
 }
 
 export default dataControl;

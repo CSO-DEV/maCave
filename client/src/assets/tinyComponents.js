@@ -10,7 +10,6 @@
  const tinyComponents={
      modal(
         toggledModal,
-        modalControl,
         handleClose,
         HeaderTitle,
         modalButton,
@@ -42,21 +41,17 @@
       * @param required  : Champ requis true / false * required field true/false
       * @param onchange  : Action sur changement * Action on change
       */
-     input(label,labelWidth,inputWidth,id,type,name,placeholder,required,maxLength,title,onchange,value){
+     input(label,styleLabel,styleInput,id,type,name,placeholder,required,maxLength,title,onchange,value){
          return(
              <div className="tinyInput">
                 <label 
-                style={{
-                    width:labelWidth
-                }}
+                style={styleLabel}
                  htmlFor={id}>{label}</label>
                 <input
                 id={id}
-                style={{
-                    width:inputWidth
-                }}
                 type={type} 
                 name={name} 
+                style={styleInput}
                 placeholder={placeholder}
                 required={required}
                 maxLength={maxLength}
@@ -75,13 +70,13 @@
       * @param id 
       * @param onchange 
       */
-     checkBox(label,labelClass,inputClass,id,name,onchange,value){
+     checkBox(label,styleLabel,styleInput,id,name,onchange,value){
          return(
              <div className="tinyCheckBox">
-                 <label className={labelClass} htmlFor={id}>{label}</label>
+                 <label style={styleLabel} htmlFor={id}>{label}</label>
                  <input 
                  id={id}
-                 className={inputClass}
+                 style={styleInput}
                  name={name}
                  type="checkbox"
                  value={value}
