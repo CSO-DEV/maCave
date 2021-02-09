@@ -149,6 +149,9 @@
                     }}
                     style={{
                         backgroundColor:wineColor,
+                        width:size,
+                        height:size,
+                        borderRadius:"100%"
                     }}
                 />
             )
