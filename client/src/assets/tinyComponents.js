@@ -4,7 +4,10 @@
 
  import {Form,Modal,Button} from 'react-bootstrap'
  import {AiOutlinePoweroff} from "react-icons/ai";
- import {FaLeaf} from 'react-icons/fa';
+ import {FaLeaf,FaWineGlassAlt,FaWineBottle} from 'react-icons/fa';
+ import {SiLoop} from "react-icons/si";
+ 
+ 
  import './style.scss';
  import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -147,12 +150,9 @@
                         handleRowData(row);
                         modalControl(true,"modify");
                     }}
-                    style={{
-                        backgroundColor:wineColor,
-                        width:size,
-                        height:size,
-                    }}
-                />
+                    
+                ><SiLoop
+                style={{color:wineColor}}/></button>
             )
          }else{
             return(

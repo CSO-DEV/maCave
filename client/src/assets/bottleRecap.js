@@ -5,6 +5,7 @@
 import './style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import tinyComponents from './tinyComponents'
+import {SiLoop} from "react-icons/si";
 
 const recap={
     /**

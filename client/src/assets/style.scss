@@ -133,6 +133,10 @@
           background-color: rgb(190, 187, 187);
           max-width: 30px;
           max-height: 30px;
+          & button {
+            background-color: transparent;
+            border: none;
+          }
         }
       }
       .wineRowButton {
