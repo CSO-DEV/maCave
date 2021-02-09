@@ -153,8 +153,8 @@
                     }}
                     style={{
                         backgroundColor:wineColor,
-                        maxWidth:size,
-                        maxHeight:size,
+                        //maxWidth:size,
+                        //maxHeight:size,
                     }}
                 />
                 </div>
