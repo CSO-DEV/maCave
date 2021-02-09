@@ -152,7 +152,7 @@
                     }}
                     
                 ><SiLoop
-                style={{color:wineColor}}/></button>
+                style={{color:wineColor,height:"30px",width:"30px"}}/></button>
             )
          }else{
             return(

@@ -130,12 +130,19 @@
           }
         }
         .wineRowBottle {
-          background-color: rgb(190, 187, 187);
-          max-width: 30px;
-          max-height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          background-color: #081e0e;
+          border-radius: 100%;
           & button {
             background-color: transparent;
             border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
           }
         }
       }
