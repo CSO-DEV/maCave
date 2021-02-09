@@ -142,10 +142,6 @@
         }
          if(row){
             return(
-                <div style={{
-                    width:size,
-                    height:size,
-                }}>
                     <button className="tinyBottle"
                     onClick={()=>{
                         handleRowData(row);
@@ -157,7 +153,6 @@
                         //maxHeight:size,
                     }}
                 />
-                </div>
             )
          }else{
             return(
