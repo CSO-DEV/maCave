@@ -142,15 +142,13 @@
         }
          if(row){
             return(
-                    <button className="tinyBottle"
+                    <button 
                     onClick={()=>{
                         handleRowData(row);
                         modalControl(true,"modify");
                     }}
                     style={{
                         backgroundColor:wineColor,
-                        //maxWidth:size,
-                        //maxHeight:size,
                     }}
                 />
             )
