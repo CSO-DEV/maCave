@@ -106,6 +106,57 @@ const modalDetail={
         modalButton,
         body
         )
-    }    
+    },
+    addProduct(row,toggledModal,handleClose,handleData){
+        const HeaderTitle= "Ajouter"
+        const buttonType="Annuler/Enregistrer";
+        const modalButton=()=>{
+            return String(buttonType)
+            .split("/")
+            .map((element,index)=>{
+              return(
+                 <Button
+                key={"modalButton" + index}
+                className="btn-secondary"
+                variant="dark"
+                onClick={()=>handleClose(index+2)}
+                >{element}</Button>              
+              )
+            })
+        };
+        const body=()=>{
+            return(
+                <div>
+                    {tinyComponents.input("Cave :",{},{},"cellar","text","cellar","",true,"none","",handleData,row.cellar)}
+                    {tinyComponents.input("Clayette :",{},{},"shelf","text","shelf","",true,"none","",handleData,row.shelf)}
+                    {tinyComponents.input("Position :",{},{},"position","text","position","",true,"none","",handleData,row.position)}
+                    {tinyComponents.input("Couleur :",{},{},"color","text","color","",true,"none","",handleData)}
+                    {tinyComponents.input("Région :",{},{},"region","text","region","",true,"none","",handleData)}
+                    {tinyComponents.input("Appellation :",{},{},"appellation","text","appellation","",true,"none","",handleData)}
+                    {tinyComponents.input("Millésime :",{},{},"vintage","text","vintage","",true,"none","",handleData)}
+                    {tinyComponents.input("Domaine :",{},{},"winery","text","winery","",true,"none","",handleData)}
+                    {tinyComponents.input("Appogée mini :",{},{},"miniAppogee","text","miniAppogee","",true,"none","",handleData)}
+                    {tinyComponents.input("Appogée maxi :",{},{},"maxiAppogee","text","maxiAppogee","",true,"none","",handleData)}
+                    {tinyComponents.input("Cèpage :",{},{},"grape","text","grape","",true,"none","",handleData)}
+                    {tinyComponents.input("Prix d'achat :",{},{},"purchasePrice","text","purchasePrice","",true,"none","",handleData)}
+                    {tinyComponents.input("Lieu d'achat :",{},{},"purchasePlace","text","purchasePlace","",true,"none","",handleData)}
+                    {tinyComponents.input("Prix de vente :",{},{},"sellingPrice","text","sellingPrice","",true,"none","",handleData)}
+                    {tinyComponents.input("Notation :",{},{},"score","text","score","",true,"none","",handleData)}
+                    {tinyComponents.input("Commentaire :",{},{},"comment","text","comment","",true,"none","",handleData)}
+                    {tinyComponents.input("Photo :",{},{},"picture","text","picture","",true,"none","",handleData)}
+                    {tinyComponents.input("Bouteille :",{},{},"bottleType","text","bottleType","",true,"none","",handleData)}
+                    {tinyComponents.checkBox("Bio ? :",{},{},"organic","organic",handleData)}
+                </div>
+            )
+        };
+        
+        return tinyComponents.modal(
+            toggledModal,
+            handleClose,
+            HeaderTitle,
+            modalButton,
+            body
+            )
+    },
 }
 export default modalDetail;

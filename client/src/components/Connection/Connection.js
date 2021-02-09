@@ -29,21 +29,15 @@ function Connection(props) {
         * @param e : Objet de saisie * Input object entry
         */
         function dataholder(e){
-            if(e.target.name==="signInEmail" || 
-            e.target.name==="signInPwd" || 
-            e.target.name==="registerEmail" || 
-            e.target.name==="registerPwd" || 
-            e.target.name==="lastname" || 
-            e.target.name==="firstname"){
-                setData(inputControl.dataholder(e,data));
-            };
             if(e.target.type==="checkbox"){
                 if(!data.forgottenPwd){
                     setData({...data,"forgottenPwd":true});
                 }else{
                     setData({...data,"forgottenPwd":false});
                 };              
-            };
+            }else{
+                    setData(inputControl.dataholder(e,data));
+                };
         };
 
         /**

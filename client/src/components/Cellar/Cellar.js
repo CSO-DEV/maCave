@@ -3,6 +3,7 @@
  */
 import React,{useEffect,useState}from 'react';
 import './style.scss';
+import moment from 'moment';
 import { Redirect } from "react-router-dom";
 import tinyComponents from '../../assets/tinyComponents';
 import caroussel from '../../assets/carousels';
@@ -10,6 +11,7 @@ import recap from '../../assets/bottleRecap';
 import modal from '../../assets/modalDetail';
 import fetchData from '../../lib/fetch';
 import dataControl from '../../lib/dataControl';
+import inputControl from '../../lib/inputControl'
 
 
 function Cellar(props) {
@@ -23,9 +25,10 @@ function Cellar(props) {
 
   const [toggledModal,setToggledModal]=useState(false);
   const [rowData,setRowData]=useState({});
+  const [modalType,setModalType]=useState('');
 
   const [toggledAlertModal,setToggledAlertModal]=useState(false);
-  const [modalType,setModalType]=useState();
+  const [alertModalType,setAlertModalType]=useState();
 
 
   /**
@@ -79,8 +82,9 @@ function Cellar(props) {
    * @function modalControl : 
    * @param booleanValue : Valeur booleenne
    */
-  function modalControl(booleanValue){
-    setToggledModal(booleanValue);
+  function modalControl(booleanValue,type){
+      setModalType(type);
+      setToggledModal(booleanValue);    
   };
 
   /**
@@ -93,15 +97,14 @@ function Cellar(props) {
 
   /**
    * @function handleData : Récupération des données
-   * @param e 
+   * @param e : event * event
    */
-  function handleData(e){
+  function handleData(e){   
     if(e.target.name==="organic"){
       setRowData({...rowData,[e.target.name]:!rowData.organic});
     }else{
-      setRowData({...rowData,[e.target.name]:e.target.value});
-    }
-   
+      setRowData(inputControl.dataholder(e,rowData));
+    };            
   };
 
   /**
@@ -160,7 +163,7 @@ function Cellar(props) {
 
   /**
    *@function cellarChoise : Affichage des caves
-   * @param {*} e 
+   * @param {*} e : event * event
    */
   function cellarChoise(e){
     alert("changement de cave")
@@ -171,7 +174,7 @@ function Cellar(props) {
    * @param toggledModal : Etat d'affichage de la modale *
    */
   const bottleDetailModal=(toggledModal)=>{
-    if(toggledModal){      
+    if(toggledModal && modalType==="modify"){   
       return modal.bottleDetail(rowData,toggledModal,handleClose,handleData)
     };
     /**
@@ -187,14 +190,37 @@ function Cellar(props) {
         fetchToApi("modify",data[0]);       
         setToggledModal(false);  
       }else if(value===4){
-        setModalType("consommer");
+        setAlertModalType("consommer");
         setToggledAlertModal(true);
       }else{
-        setModalType("supprimer");
+        setAlertModalType("supprimer");
         setToggledAlertModal(true);
       }    
     };
   };
+
+    /**
+   * @method addProductModal : Lance et gère la modale de détail *
+   * @param toggledModal : Etat d'affichage de la modale *
+   */
+  const addProductModal=(toggledModal)=>{
+    if(toggledModal && modalType==="addProduct"){   
+      return modal.addProduct(rowData,toggledModal,handleClose,handleData)
+    };
+    /**
+     * @function handleClose : Commande de fermeture de la modale *
+     * @param value : Valeur attribuée pour chaque action à lancer *
+     */
+    function handleClose(value){
+      if(value<=2){
+        setToggledModal(false);
+      }else{
+        fetchToApi("add",rowData);       
+        setToggledModal(false);  
+      }  
+    };
+  };
+
 
 /**
  * @function alertModal : Lance et gère la modale d'alerte *
@@ -202,7 +228,7 @@ function Cellar(props) {
  */
   const alertModal=(toggledAlertModal)=>{
     if(toggledAlertModal){      
-      return modal.alert(rowData,toggledAlertModal,handleClose,modalType)
+      return modal.alert(rowData,toggledAlertModal,handleClose,alertModalType)
     };
     /**
      * @function handleClose : Commande de fermeture de la modale *
@@ -211,15 +237,24 @@ function Cellar(props) {
     function handleClose(value){
       if(value<=2){
         setToggledAlertModal(false);
-      }else if(modalType==="supprimer"){
-        alert('lancer la commande supprimer');
+      }else if(alertModalType==="supprimer"){
+        rowData.deletionDate=moment(new Date()).format("DD/MM/YYYY").toString()
+        let data=dataControl.modifyData(productList,productByCellarList,rowData);
+        setProductByCellarList(data[1]);
+        fetchToApi("modify",data[0]);       
         setToggledAlertModal(false);
-      }else if(modalType==="consommer"){
-        alert('lancer la commande consommer');
+        setToggledModal(false);  
+      }else if(alertModalType==="consommer"){
+        rowData.consumptionDate=moment(new Date()).format("DD/MM/YYYY").toString()
+        let data=dataControl.modifyData(productList,productByCellarList,rowData);
+        setProductByCellarList(data[1]);
+        fetchToApi("modify",data[0]);       
         setToggledAlertModal(false);
+        setToggledModal(false);  
       };
     };
   };
+
 
     return (
       <div className="cellarContainer"
@@ -228,7 +263,7 @@ function Cellar(props) {
         {logout()}
         {bottleDetailModal(toggledModal)}
         {alertModal(toggledAlertModal)}
-
+        {addProductModal(toggledModal)}
         <div className="topContainer">
           <div className="cellarTitle">
             <h1 style={{fontSize:"30px"}}>Ma Cave à Vin</h1>

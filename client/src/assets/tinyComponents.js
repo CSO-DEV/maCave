@@ -3,6 +3,7 @@
  */
 
  import {Form,Modal,Button} from 'react-bootstrap'
+ import {AiOutlinePoweroff} from "react-icons/ai";
  import './style.scss';
  import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -56,7 +57,7 @@
                 required={required}
                 maxLength={maxLength}
                 title={title}
-                onChange={onchange}
+                onChange={(e)=>onchange(e)}
                 value={value}               
                 ></input>
              </div>
@@ -72,6 +73,7 @@
       */
      checkBox(label,styleLabel,styleInput,id,name,onchange,value){
          return(
+             value?
              <div className="tinyCheckBox">
                  <label style={styleLabel} htmlFor={id}>{label}</label>
                  <input 
@@ -79,10 +81,23 @@
                  style={styleInput}
                  name={name}
                  type="checkbox"
+                 checked='checked'
                  value={value}
                  onChange={onchange}
                  ></input>                 
              </div>
+             :
+             <div className="tinyCheckBox">
+             <label style={styleLabel} htmlFor={id}>{label}</label>
+             <input 
+             id={id}
+             style={styleInput}
+             name={name}
+             type="checkbox"
+             value={value}
+             onChange={onchange}
+             ></input>                 
+         </div>
          )
 
      },
@@ -100,7 +115,7 @@
                 <button 
                 id={id}
                 onClick={onclick}>
-                    Deconnexion</button>
+                    <AiOutlinePoweroff/></button>
             </div>
          )
      },
@@ -133,7 +148,7 @@
                     <button className="tinyBottle"
                     onClick={()=>{
                         handleRowData(row);
-                        modalControl(true);
+                        modalControl(true,"modify");
                     }}
                     style={{
                         backgroundColor:wineColor,

@@ -4,6 +4,7 @@
 
 import {Button,Card} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
+import {FaWineBottle} from 'react-icons/fa';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import './style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -34,13 +35,17 @@ const caroussels={
                 text: title,
                 formatter: (cellContent, row) => {
                     if(row.appellation==="Ajouter"){
+             
                         return(
                             <div className="wineRow wineRowButton">
-                                <Button variant="secondary" size="sm" onClick={()=>alert("Nouvelle bouteille dans cave " + row.cellar + " Clayette " + row.shelf + " " +  row.position)}>Ajouter une bouteille</Button>                     
+                                <Button variant="secondary" size="sm" onClick={()=>{
+                                    //row.appellation="";
+                                    handleRowData(row);
+                                    modalControl(true,"addProduct")                             
+                                }}>+<FaWineBottle/></Button>                     
                             </div>
                             )
                     }else{
-                        console.log(row)
                       return(
                           <div className="wineRow">
                               <div className="wineRowBottle">
