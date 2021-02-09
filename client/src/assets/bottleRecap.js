@@ -13,12 +13,13 @@ const recap={
      * @param size 
      */
     bottleRecap(productList,size){
-        let [nbRouge,nbRose,nbBlanc,nbChampagne]=[0,0,0,0];
+        let [nbRouge,nbRose,nbBlanc,nbChampagne,nbOrganic]=[0,0,0,0,0];
         productList.forEach(element=>{
             if(element.color==="rouge" && !element.consumptionDate && !element.deletionDate){nbRouge+=1}
             if(element.color==="rose" && !element.consumptionDate && !element.deletionDate){nbRose+=1}
             if(element.color==="blanc" && !element.consumptionDate && !element.deletionDate){nbBlanc+=1};
-            if(element.color!=="rouge" && element.color!=="rose" && element.color!=="blanc" && !element.consumptionDate && !element.deletionDate){nbChampagne+=1}
+            if(element.color!=="rouge" && element.color!=="rose" && element.color!=="blanc" && !element.consumptionDate && !element.deletionDate){nbChampagne+=1};
+            if(element.organic && !element.consumptionDate && !element.deletionDate){nbOrganic+=1}
           });
           return(
               <div style={{display:"flex", flexDirection:"row"}}>
@@ -26,7 +27,7 @@ const recap={
                 {tinyComponents.bottle("rose",nbRose,size)}
                 {tinyComponents.bottle("blanc",nbBlanc,size)}
                 {tinyComponents.bottle("champagne",nbChampagne,size)}
-                {tinyComponents.organic("champagne",nbChampagne,{width:size,height:size,})}
+                {tinyComponents.organic("champagne",nbOrganic,{width:size,height:size,})}
               </div>      
               )
     }    
