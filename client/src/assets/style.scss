@@ -93,6 +93,7 @@
       width: 90vw;
     }
     .cellarDisplayFrontShelf {
+      height: fit-content;
       margin: 5px;
       & th {
         padding: 0;
@@ -102,6 +103,7 @@
       }
     }
     .cellarDisplayBackShelf {
+      height: fit-content;
       margin: 5px;
       & th {
         padding: 0;
