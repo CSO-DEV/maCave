@@ -4,6 +4,7 @@
 
  import {Form,Modal,Button} from 'react-bootstrap'
  import {AiOutlinePoweroff} from "react-icons/ai";
+ import {FaLeaf} from 'react-icons/fa';
  import './style.scss';
  import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -155,7 +156,7 @@
                         width:size,
                         height:size,
                     }}
-                    />
+                />
                 </div>
             )
          }else{
@@ -171,6 +172,16 @@
             )  
          }
         
+     },
+
+     organic(color,text,style){
+        return(
+            <div className="tinyOrganicIcon"
+            style={style}>
+                <label style={{color:"black"}}>{text}</label>
+                <FaLeaf style={style}/>                
+            </div>
+        )  
      },
      /**
       * @method listbox :

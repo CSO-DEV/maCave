@@ -5,6 +5,7 @@
 import {Button,Card} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {FaWineBottle} from 'react-icons/fa';
+import {FaLeaf} from 'react-icons/fa';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import './style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -54,7 +55,14 @@ const caroussels={
                               
                               <div className="wineRowText">                     
                                       <span className="wineRowCalled">{row.winery}</span>
-                                      <span className="wineRowVintage">{row.vintage}</span>                       
+                                      {row.organic?
+                                      <div>
+                                        <FaLeaf className="organicIcon"/>
+                                        <span className="wineRowVintage">{row.vintage}</span>
+                                      </div>
+                                    :
+                                        <span className="wineRowVintage">{row.vintage}</span>
+                                    }                      
                               </div>                                    
                           </div>
                           )}

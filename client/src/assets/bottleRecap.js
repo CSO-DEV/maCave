@@ -26,6 +26,7 @@ const recap={
                 {tinyComponents.bottle("rose",nbRose,size)}
                 {tinyComponents.bottle("blanc",nbBlanc,size)}
                 {tinyComponents.bottle("champagne",nbChampagne,size)}
+                {tinyComponents.organic("champagne",nbChampagne,{width:size,height:size,})}
               </div>      
               )
     }    

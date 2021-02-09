@@ -47,7 +47,7 @@ const modalDetail={
                     {tinyComponents.input("Commentaire :",{},{},"comment","text","comment","",true,"none","",handleData,row.comment)}
                     {tinyComponents.input("Photo :",{},{},"picture","text","picture","",true,"none","",handleData,row.picture)}
                     {tinyComponents.input("Bouteille :",{},{},"bottleType","text","bottleType","",true,"none","",handleData,row.bottleType)}
-                    {tinyComponents.checkBox("Bio ? :",{},{},"organic","organic",handleData,row.organic)}
+                    {tinyComponents.checkBox("Bio :",{},{},"organic","organic",handleData,row.organic)}
                 </div>
             )
         };
@@ -145,7 +145,7 @@ const modalDetail={
                     {tinyComponents.input("Commentaire :",{},{},"comment","text","comment","",true,"none","",handleData)}
                     {tinyComponents.input("Photo :",{},{},"picture","text","picture","",true,"none","",handleData)}
                     {tinyComponents.input("Bouteille :",{},{},"bottleType","text","bottleType","",true,"none","",handleData)}
-                    {tinyComponents.checkBox("Bio ? :",{},{},"organic","organic",handleData)}
+                    {tinyComponents.checkBox("Bio :",{},{},"organic","organic",handleData)}
                 </div>
             )
         };
