@@ -32,6 +32,7 @@ const modalDetail={
                     {tinyComponents.input("Cave :",{},{},"cellar","text","cellar","",true,"none","",handleData,row.cellar)}
                     {tinyComponents.input("Clayette :",{},{},"shelf","text","shelf","",true,"none","",handleData,row.shelf)}
                     {tinyComponents.input("Position :",{},{},"position","text","position","",true,"none","",handleData,row.position)}
+                    {tinyComponents.checkBox("Bio :",{},{},"organic","organic",handleData,row.organic)}
                     {tinyComponents.input("Couleur :",{},{},"color","text","color","",true,"none","",handleData,row.color)}
                     {tinyComponents.input("Région :",{},{},"region","text","region","",true,"none","",handleData,row.region)}
                     {tinyComponents.input("Appellation :",{},{},"appellation","text","appellation","",true,"none","",handleData,row.appellation)}
@@ -47,7 +48,7 @@ const modalDetail={
                     {tinyComponents.input("Commentaire :",{},{},"comment","text","comment","",true,"none","",handleData,row.comment)}
                     {tinyComponents.input("Photo :",{},{},"picture","text","picture","",true,"none","",handleData,row.picture)}
                     {tinyComponents.input("Bouteille :",{},{},"bottleType","text","bottleType","",true,"none","",handleData,row.bottleType)}
-                    {tinyComponents.checkBox("Bio :",{},{},"organic","organic",handleData,row.organic)}
+                    
                 </div>
             )
         };
@@ -128,8 +129,10 @@ const modalDetail={
             return(
                 <div>
                     {tinyComponents.input("Cave :",{},{},"cellar","text","cellar","",true,"none","",handleData,row.cellar)}
+ 
                     {tinyComponents.input("Clayette :",{},{},"shelf","text","shelf","",true,"none","",handleData,row.shelf)}
                     {tinyComponents.input("Position :",{},{},"position","text","position","",true,"none","",handleData,row.position)}
+                    {tinyComponents.checkBox("Bio :",{width:"120px"},{},"organic","organic",handleData)}
                     {tinyComponents.input("Couleur :",{},{},"color","text","color","",true,"none","",handleData)}
                     {tinyComponents.input("Région :",{},{},"region","text","region","",true,"none","",handleData)}
                     {tinyComponents.input("Appellation :",{},{},"appellation","text","appellation","",true,"none","",handleData)}
@@ -145,7 +148,7 @@ const modalDetail={
                     {tinyComponents.input("Commentaire :",{},{},"comment","text","comment","",true,"none","",handleData)}
                     {tinyComponents.input("Photo :",{},{},"picture","text","picture","",true,"none","",handleData)}
                     {tinyComponents.input("Bouteille :",{},{},"bottleType","text","bottleType","",true,"none","",handleData)}
-                    {tinyComponents.checkBox("Bio :",{},{},"organic","organic",handleData)}
+
                 </div>
             )
         };

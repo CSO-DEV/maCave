@@ -1,6 +1,7 @@
 .tinyInput {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 2px;
   & label {
     margin-right: 10px;
@@ -14,7 +15,7 @@
 .tinyCheckBox {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   margin: 2px;
   & label {
     margin-right: 10px;
@@ -46,15 +47,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   text-align: center;
   margin: 1px;
-  border: 1px solid black;
   & label {
     margin: 0;
     font-weight: bolder;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 30px;
+    height: 30px;
   }
 }
 .tinyOrganicIcon {
@@ -78,85 +82,122 @@
   width: -webkit-fill-available;
 }
 
-.cellarDisplay {
+.cellarCarousel {
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 1000px) {
-    font-size: smaller;
-  }
-  .cellarDisplayShelf {
-    background-color: rgba(63, 34, 34, 0.7);
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  padding-top: 100px;
+  .cellarCarouselheader {
     display: flex;
-    width: 60vw;
     flex-direction: row;
+    margin: 5px;
+  }
+  .cellarGlobalDisplay {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    max-width: 60vw;
+    position: relative;
     @media screen and (max-width: 1000px) {
-      width: 90vw;
+      max-width: 90vw;
     }
-    .cellarDisplayFrontShelf {
-      height: fit-content;
-      margin: 5px;
-      & th {
-        padding: 0;
-      }
-      .table {
-        margin-bottom: 0;
-      }
-    }
-    .cellarDisplayBackShelf {
-      height: fit-content;
-      margin: 5px;
-      & th {
-        padding: 0;
-      }
-      .table {
-        margin-bottom: 0;
-      }
-    }
-    & td {
-      padding: 5px;
-      background-color: rgb(190, 187, 187);
-      .wineRow {
+    .cellarDisplayContainer {
+      display: flex;
+      .cellarDisplay {
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        line-height: 0.9;
+        flex-direction: column;
+        display: flex;
+        flex-direction: column;
+        height: 75vh;
+        @media screen and (max-width: 1000px) {
+          font-size: smaller;
+        }
+        .cellarDisplayShelf {
+          background-color: rgba(63, 34, 34, 0.7);
+          display: flex;
+          width: 58vw;
+          flex-direction: row;
+          @media screen and (max-width: 1000px) {
+            width: 90vw;
+          }
+          .cellarDisplayFrontShelf {
+            height: fit-content;
+            margin: 5px;
+            & th {
+              padding: 0;
+            }
+            .table {
+              margin-bottom: 0;
+            }
+          }
+          .cellarDisplayBackShelf {
+            height: fit-content;
+            margin: 5px;
+            & th {
+              padding: 0;
+            }
+            .table {
+              margin-bottom: 0;
+            }
+          }
+          & td {
+            padding: 5px;
+            background-color: rgb(190, 187, 187);
+            .wineRow {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              line-height: 0.9;
 
-        .wineRowText {
-          display: flex;
-          flex-direction: column;
-          padding-left: 3px;
-          .organicIcon {
-            color: rgb(106, 150, 41);
+              .wineRowText {
+                display: flex;
+                flex-direction: column;
+                padding-left: 3px;
+                .organicIcon {
+                  color: rgb(106, 150, 41);
+                }
+              }
+              .wineRowBottle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border-radius: 100%;
+                & button {
+                  background-color: transparent;
+                  border: none;
+                  padding: 0;
+                  width: 30px;
+                  height: 30px;
+                }
+              }
+            }
+            .wineRowButton {
+              justify-content: center;
+            }
           }
         }
-        .wineRowBottle {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 30px;
-          height: 30px;
-          //background-color: #081e0e;
-          border-radius: 100%;
-          & button {
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-          }
-        }
-      }
-      .wineRowButton {
-        justify-content: center;
       }
     }
   }
 }
+
 .modal {
   font-size: smaller;
   button {
     font-size: smaller;
     margin: 1px;
     padding: 2px 5px;
+  }
+}
+
+.recapContainer {
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 1000px) {
+    font-size: smaller;
   }
 }

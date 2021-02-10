@@ -6,6 +6,8 @@
  import {AiOutlinePoweroff} from "react-icons/ai";
  import {FaLeaf,FaWineGlassAlt,FaWineBottle} from 'react-icons/fa';
  import {SiLoop} from "react-icons/si";
+ import {BsFillCircleFill} from "react-icons/bs";
+
  
  
  import './style.scss';
@@ -151,14 +153,18 @@
                         modalControl(true,"modify");
                     }}
                     
-                ><SiLoop
-                style={{color:wineColor,height:"30px",width:"30px"}}/></button>
+                ><FaWineGlassAlt
+                style={{
+                    color:wineColor,
+                    height:"30px",
+                    width:"30px"}}/></button>
             )
          }else{
             return(
                 <div className="tinyBottle"
                 style={{
-                    backgroundColor:wineColor,
+                    backgroundColor:"transparent",
+                    border:"4px solid " + wineColor,
                     width:size,
                     height:size,
                 }}>
@@ -205,7 +211,7 @@
       * @param cellarChoise 
       * @param text 
       */
-     filter(list,cellarChoise,text){
+     filter(label,labelStyle,list,cellarChoise,text,id,name){
         function optionList(){
             return list.map((element,index)=>{
                 return (
@@ -216,20 +222,43 @@
             });
         };
         return(
+            <>
+            {label? 
+            <div className="tinyLogOut">
+                <label style={labelStyle} htmlFor={id}>{label}</label>
+                <Form.Control
+                as="select"
+                className="my-1 mr-sm-2 categoryFilter"
+                id={id}
+                name={name}
+                //defaultValue={categoryChoise}
+                custom
+                onChange={(e)=>cellarChoise(e)}
+                >
+                {/*<option value="all">Toutes Catégories...</option>*/}
+                {optionList()}
+                </Form.Control> 
+            </div>
+            :
             <Form.Control
             as="select"
             className="my-1 mr-sm-2 categoryFilter"
-            id="inlineFormCustomSelectPref"
-            name="filter"
+            id={id}
+            name={name}
             //defaultValue={categoryChoise}
             custom
             onChange={(e)=>cellarChoise(e)}
-        >
+            >
             {/*<option value="all">Toutes Catégories...</option>*/}
             {optionList()}
-        </Form.Control>   
+            </Form.Control> 
+            }
+           
+            </>
+              
         );
     },
+    
      
  }
  export default tinyComponents;

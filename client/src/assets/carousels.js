@@ -7,7 +7,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import {FaWineBottle} from 'react-icons/fa';
 import {FaLeaf} from 'react-icons/fa';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import './style.scss';
+//import './style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import tinyComponents from './tinyComponents';
 
@@ -35,12 +35,10 @@ const caroussels={
                 dataField: 'name',
                 text: title,
                 formatter: (cellContent, row) => {
-                    if(row.appellation==="Ajouter"){
-             
+                    if(row.appellation==="Ajouter"){             
                         return(
                             <div className="wineRow wineRowButton">
                                 <Button variant="secondary" size="sm" onClick={()=>{
-                                    //row.appellation="";
                                     handleRowData(row);
                                     modalControl(true,"addProduct")                             
                                 }}>+<FaWineBottle/></Button>                     
@@ -137,10 +135,10 @@ const caroussels={
         return(
             <>
             <div className="cellarCarouselheader">
-                {tinyComponents.filter(cellarList,cellarChoise,"Cave ")}
+                {tinyComponents.filter("","",cellarList,cellarChoise,"Cave :","","")}
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
-                <div style={{display: "flex"}}>
+                <div className="cellarDisplayContainer" style={{display: "flex"}}>
                     {cellar(products)}
                 </div>
                           

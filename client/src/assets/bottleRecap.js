@@ -5,7 +5,6 @@
 import './style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import tinyComponents from './tinyComponents'
-import {SiLoop} from "react-icons/si";
 
 const recap={
     /**
@@ -23,11 +22,11 @@ const recap={
             if(element.organic && !element.consumptionDate && !element.deletionDate){nbOrganic+=1}
           });
           return(
-              <div style={{display:"flex", flexDirection:"row"}}>
-                {tinyComponents.bottle("rouge",nbRouge,size)}
-                {tinyComponents.bottle("rose",nbRose,size)}
-                {tinyComponents.bottle("blanc",nbBlanc,size)}
-                {tinyComponents.bottle("champagne",nbChampagne,size)}
+              <div className='recapContainer'>
+                {tinyComponents.bottle("rouge",nbRouge,{width:size,height:size,})}
+                {tinyComponents.bottle("rose",nbRose,{width:size,height:size,})}
+                {tinyComponents.bottle("blanc",nbBlanc,{width:size,height:size,})}
+                {tinyComponents.bottle("champagne",nbChampagne,{width:size,height:size,})}
                 {tinyComponents.organic("champagne",nbOrganic,{width:size,height:size,})}
               </div>      
               )
