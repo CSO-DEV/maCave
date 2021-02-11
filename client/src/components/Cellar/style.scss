@@ -2,20 +2,78 @@
   position: relative;
   min-height: 100vh;
   background-size: cover;
+  z-index: 0;
   .cellarTitle {
     position: fixed;
-    //background-color: rgb(99, 78, 78);
+    background-color: rgb(99, 78, 78);
     color: white;
     text-align: center;
     width: 100%;
-    z-index: 2;
     & h1 {
       margin: 0;
+      font-size: 30px;
     }
-    .cellarDisconnectionButton {
+    .recapDisconnectContainer {
       display: flex;
-      justify-content: flex-end;
-      text-align: right;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      .cellarDisconnectionButton {
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+      }
     }
+  }
+}
+.configSlider {
+  display: flex;
+  flex-direction: row-reverse;
+  position: fixed;
+  top: 81px;
+  left: -385px;
+  z-index: 3;
+  transition: left 1s linear;
+  .configSliderIconContainer {
+    background-color: rgb(99, 78, 78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 0 50% 50% 0;
+    .configSliderIcon {
+      color: white;
+      height: 25px;
+      width: 25px;
+      animation: spinner infinite 10s linear;
+    }
+  }
+  .configContainer {
+    background-color: rgb(99, 78, 78);
+    padding: 5px;
+  }
+  .importContainer {
+    height: 0;
+    transition: height 0.5s linear;
+    overflow-y: hidden;
+  }
+  .cellarControll {
+    height: 0;
+    transition: height 0.5s linear;
+    overflow-y: hidden;
+  }
+  .accountContainer {
+    height: 0;
+    transition: height 0.5s linear;
+    overflow-y: hidden;
+  }
+}
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

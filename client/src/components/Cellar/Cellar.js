@@ -12,6 +12,8 @@ import modal from '../../assets/modalDetail';
 import fetchData from '../../lib/fetch';
 import dataControl from '../../lib/dataControl';
 import inputControl from '../../lib/inputControl'
+import {GiGrapes} from "react-icons/gi";
+import { Card } from 'react-bootstrap';
 
 
 function Cellar(props) {
@@ -30,7 +32,7 @@ function Cellar(props) {
   const [toggledAlertModal,setToggledAlertModal]=useState(false);
   const [alertModalType,setAlertModalType]=useState();
 
-
+  const [config,setConfig]=useState({slider:false,importData:false,cave:false,account:false})
   /**
    * @useEffect
    */
@@ -266,32 +268,120 @@ function Cellar(props) {
         {addProductModal(toggledModal)}
         <div className="topContainer">
           <div className="cellarTitle">
-            <h1 style={{fontSize:"30px"}}>Ma Cave à Vin</h1>
-            <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between",alignItems: "baseline"}}>
+            <h1>Ma Cave à Vin</h1>
+            <div className='recapDisconnectContainer'>
               {recap.bottleRecap(productList,"35px")}
               <div className="cellarDisconnectionButton">
                 {tinyComponents.logOut(name, setRedirectionLogout)}
               </div>
             </div>            
           </div>
-        </div>    
+        </div>
+        <div className="configSlider"  id="configSlider">
+          <button className="configSliderIconContainer"
+          onClick={()=>{
+            console.log(config.slider)
+            if(!config.slider){
+              document.getElementById('configSlider').style.left="0px";
+              config.slider=true;
+              return;
+            }else{
+              document.getElementById('configSlider').style.left="-385px";
+              document.getElementById('cellarControll').style.height="0px";
+              document.getElementById('importContainer').style.height="0px";
+              document.getElementById('accountContainer').style.height="0px";
+              config.slider=false;
+              return;
+            }
+           }}><GiGrapes className="configSliderIcon"/>
+          </button>
+          <div className="configContainer">
+            <h4>Configuration</h4>
+            <Card className="cellarCard"  style={{backgroundColor:"transparent"}}>
+              <button style={{backgroundColor:"transparent",border:"none",textAlign:'left'}}
+                onClick={()=>{
+                  if(!config.callar){
+                    document.getElementById('cellarControll').style.height="300px";
+                    config.callar=true;
+                    return
+                  }else{
+                    document.getElementById('cellarControll').style.height="0px";
+                    config.callar=false;
+                    return               
+                  }
+                }}>Gestion des Caves :</button>
+                <div className="cellarControll" id="cellarControll">
+                  <Card>
+                  <h6>Ajouter une cave :</h6>
+                  <label>Nom de la cave :</label>
+                  <input></input>
+                  <button>Ajouter</button>
+                  </Card>
+                  <Card>
+                  <h6>Supprimer une cave :</h6>
+                  <label>Nom de la cave :</label>
+                  <input></input>
+                  <button>Supprimer</button>
+                  </Card>
+                </div>
+            </Card>
+            <Card className="importCard"  style={{backgroundColor:"transparent"}}>
+              <button style={{backgroundColor:"transparent",border:"none",textAlign:'left'}}
+              onClick={()=>{
+                if(!config.importData){
+                  document.getElementById('importContainer').style.height="35px";
+                  config.importData=true;
+                  return
+                }else{
+                  document.getElementById('importContainer').style.height="0px";
+                  config.importData=false;
+                  return               
+                }
+              }}>Importer des données :</button>
+
+              <div className="importContainer" id="importContainer">        
+                  <form className="containFormulaire" onSubmit={(e)=>importXlFile(e)}>
+                    <input
+                    type="file"
+                    name="xlFile"
+                    placeholder="Societé..."
+                    />
+                    <input
+                    type="submit"
+                    value="Confirmer"
+                    id="submit_but"
+                    />
+                  </form>         
+                </div>
+              </Card>
+            <Card className="account"  style={{backgroundColor:"transparent"}}>
+              <button style={{backgroundColor:"transparent",border:"none",textAlign:'left'}}
+              onClick={()=>{
+                if(!config.account){
+                  document.getElementById('accountContainer').style.height="200px";
+                  config.account=true;
+                  return
+                }else{
+                  document.getElementById('accountContainer').style.height="0px";
+                  config.account=false;
+                  return               
+                }
+              }}>Votre compte :</button>
+
+              <div className="accountContainer" id="accountContainer"> 
+                <Card>
+               {tinyComponents.input("Email :",{},{},"email","email","email","email@",true,"non","title",handleData,"")}
+               {tinyComponents.input("Nom :",{},{},"lastname","text","lastname","",true,"non","lastname",handleData,"")}
+               {tinyComponents.input("Prénom :",{},{},"firstname","text","firstname","",true,"non","firstname",handleData,"")}
+                </Card>   
+
+              </div>
+            </Card>
+            </div>
+          </div>    
         <div className="cellarCarousel">
             {caroussel.cellar(cellar,productByCellarList,handleRowData,cellarChoise,modalControl)}
         </div>
-        <div className="importConatiner" style={{display:"none",backgroundColor:"blue",position: "fixed",top: "81px"}}>
-            <form className="containtFormulaire" onSubmit={(e)=>importXlFile(e)}>
-              <input
-              type="file"
-              name="xlFile"
-              placeholder="Societé..."
-              />
-              <input
-              type="submit"
-              value="Confirmer"
-              id="submit_but"
-              />
-            </form>
-          </div>    
       </div>
     );
 }

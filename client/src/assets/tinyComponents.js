@@ -5,8 +5,6 @@
  import {Form,Modal,Button} from 'react-bootstrap'
  import {AiOutlinePoweroff} from "react-icons/ai";
  import {FaLeaf,FaWineGlassAlt,FaWineBottle} from 'react-icons/fa';
- import {SiLoop} from "react-icons/si";
- import {BsFillCircleFill} from "react-icons/bs";
 
  
  
