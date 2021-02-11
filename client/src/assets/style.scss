@@ -88,7 +88,7 @@
   align-items: center;
   width: fit-content;
   margin: auto;
-  padding-top: 100px;
+  padding-top: 80px;
   .cellarCarouselheader {
     display: flex;
     flex-direction: row;
@@ -111,7 +111,7 @@
         flex-direction: column;
         display: flex;
         flex-direction: column;
-        height: 75vh;
+        height: 72vh;
         @media screen and (max-width: 1000px) {
           font-size: smaller;
         }
