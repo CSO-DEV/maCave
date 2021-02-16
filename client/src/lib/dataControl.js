@@ -1,19 +1,36 @@
 /**
- * inputControl.js - Contrôle de saisie des mots de passes
+ * dataControl.js - 
  */
 const dataControl = {
 
     productList(data){
-        let [cellarList,shelfbyCellarList,productsByCellarList,productList]=[[],[],[],[]];
+        let [cellarList,shelfbyCellarList,productsByCellarList,productList,cellarNameList]=[[],[],[],[],[]];
         data.cellar.forEach(element => {  
           cellarList.push(element.cellar);
           shelfbyCellarList.push("Cave"+element.cellar+"Clayette"+element.shelf);
         });
+
         let uniqCellarList = [...new Set(cellarList.sort())];
         let uniqShelfbyCellarList = [...new Set(shelfbyCellarList.sort())];
-        
+       
+
         uniqCellarList.forEach((cellar,cellarIndex)=>{
-          productsByCellarList.push({"cellar":cellar,"cellarContent":[]})
+          let cellarNameObject={};
+          let compt=0;
+          let cellarName="";
+          data.cellar.forEach(element => {  
+            if(element.cellar===cellar && compt===0){
+              cellarNameObject.cellar=element.cellar;
+              if (element.cellarName){cellarName=element.cellarName}else{cellarName="Cave " + cellar};
+              compt+=1
+              if(element.cellarName){cellarNameObject.name=element.cellarName} else{cellarNameObject.name="Cave " + element.cellar}
+              cellarNameList.push(cellarNameObject);
+              return;
+            }            
+           }); 
+
+          productsByCellarList.push({"cellar":cellar,"cellarName":cellarName,cellarContent:[]});
+
           let nbShelf=0;
          
             uniqShelfbyCellarList.forEach((shelf,shelfIndex)=>{          
@@ -36,14 +53,23 @@ const dataControl = {
               };                    
             });                  
         });
-        return [uniqCellarList,productsByCellarList,productList];
+        return [uniqCellarList,productsByCellarList,productList,cellarNameList];
     },
 
-    umptyProductList(){
+    umptyProductList(n,cellarName){
+      let nextNum=n+1;
+      let name;
+      if (cellarName){
+        name=cellarName
+      }else{
+        name="Cave " + nextNum
+      }
       return [
-        [1],
+        [nextNum],
+        [{"cellar" : nextNum, "name":name}],
       [
-        { "cellar":1,
+        { "cellar":n+1,
+          "cellarName":name,
           "cellarContent":[
             {
               "shelf":1,
@@ -85,7 +111,8 @@ const dataControl = {
         }
       });
       return[productList,productByCellarList]
-    }
+    },
+    
 }
 
 export default dataControl;

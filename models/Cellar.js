@@ -7,7 +7,9 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const productSchema = new mongoose.Schema({
    cellar:Number,
+   cellarName:String,
    shelf:Number,
+   deletionCellarDate:String,
    position:String,
    registrationDate:String,
    color:String,

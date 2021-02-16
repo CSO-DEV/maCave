@@ -215,7 +215,7 @@
                 return (
                     <option 
                     key={"option" + index}
-                    value={element}>{text+element}</option>
+                    value={element.cellar + "_" + element.name}>{element.name}</option>
                 );
             });
         };
@@ -242,7 +242,6 @@
             as="select"
             className="my-1 mr-sm-2 categoryFilter"
             id={id}
-            name={name}
             //defaultValue={categoryChoise}
             custom
             onChange={(e)=>cellarChoise(e)}

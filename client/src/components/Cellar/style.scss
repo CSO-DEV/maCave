@@ -30,8 +30,9 @@
   display: flex;
   flex-direction: row-reverse;
   position: fixed;
+  width: 385px;
   top: 81px;
-  left: -385px;
+  left: -350px;
   z-index: 3;
   transition: left 1s linear;
   .configSliderIconContainer {

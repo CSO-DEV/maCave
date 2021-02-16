@@ -21,7 +21,7 @@ const caroussels={
      * @param onclick  : Commande sur selection d'une bouteille * 
      * @param cellarChoise : Choix de la cave à afficher *
      */
-    cellar(cellarList,products,handleRowData,cellarChoise,modalControl){      
+    cellar(cellarList,products,handleRowData,cellarChoise,modalControl,activeCellar,cellarNameList){  
         /**
          * @function column : Configuration des colonnes * column configuration
          * @param title : Titre des tableaux * tables title
@@ -73,7 +73,7 @@ const caroussels={
         function cellar(array){
             return array.map((element,index)=>{
                 return (
-                    <div className="cellarDisplay" name={element.cellar} key={'cellar' + index}>
+                    <div className="cellarDisplay" id={element.cellar} name={element.cellarName} key={'cellar' + index}>
                         {shelf(element.cellarContent,element.cellar)}
                     </div>
                 )
@@ -132,11 +132,12 @@ const caroussels={
             })
         };
         
-
         return(
             <>
             <div className="cellarCarouselheader">
-                {tinyComponents.filter("","",cellarList,cellarChoise,"Cave :","","")}
+                {tinyComponents.filter("","",cellarNameList,cellarChoise,"Cave ","","")}
+     
+                
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">
                 <div className="cellarDisplayContainer" style={{display: "flex"}}>

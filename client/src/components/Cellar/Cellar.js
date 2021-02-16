@@ -13,12 +13,14 @@ import fetchData from '../../lib/fetch';
 import dataControl from '../../lib/dataControl';
 import inputControl from '../../lib/inputControl'
 import {GiGrapes} from "react-icons/gi";
-import { Card } from 'react-bootstrap';
+import { Card,Button } from 'react-bootstrap';
 
 
 function Cellar(props) {
 
   const [cellar,setCellar] = useState([]);
+  const [cellarName,setCellarName] = useState([]);
+  const [activeCellar,setActiveCellar]=useState([]);
   const [productByCellarList,setProductByCellarList] = useState([]);
   const [productList,setProductList] = useState([]);  
   const [name,setName] = useState('');
@@ -46,17 +48,19 @@ function Cellar(props) {
   function getProduct(){     
         fetchData.fetchData("POST", "/api/cellar", {}, true).then(
             (result) => {
-              console.log(result)
               setName(result.name);
               if(result.cellar.length===0){
-                let umptyData=dataControl.umptyProductList()
+                let umptyData=dataControl.umptyProductList(0)
                 setCellar(umptyData[0]);
-                setProductByCellarList(umptyData[1]);
+                setCellarName(umptyData[1])
+                setProductByCellarList(umptyData[2]);
               }else{
                 let fullData=dataControl.productList(result);
                 setCellar(fullData[0]);
+                setCellarName(fullData[3])
                 setProductByCellarList(fullData[1]);
                 setProductList(fullData[2]);
+                if(activeCellar.length===0){setActiveCellar(fullData[3][0])}
               };
 
               },
@@ -101,7 +105,7 @@ function Cellar(props) {
    * @function handleData : Récupération des données
    * @param e : event * event
    */
-  function handleData(e){   
+  function handleData(e){  
     if(e.target.name==="organic"){
       setRowData({...rowData,[e.target.name]:!rowData.organic});
     }else{
@@ -164,11 +168,21 @@ function Cellar(props) {
   };
 
   /**
-   *@function cellarChoise : Affichage des caves
-   * @param {*} e : event * event
+   *@function cellarChoise : Affichage des caves suivant la liste de choix
+   * @param e : event * event
    */
   function cellarChoise(e){
-    alert("changement de cave")
+    let data=e.target.value.split('_');
+    setActiveCellar({"cellar":parseInt(data[0]), "cellarName":data[1]});
+
+    let cellar = document.getElementsByClassName('cellarDisplay');
+    for(let i=0;i<cellar.length;i++){
+      if(cellar[i].id===data[0]){
+        document.getElementById(cellar[i].id).style.display='flex';
+      }else{
+        document.getElementById(cellar[i].id).style.display='none'; 
+      };
+    };
   };
 
   /**
@@ -280,13 +294,12 @@ function Cellar(props) {
         <div className="configSlider"  id="configSlider">
           <button className="configSliderIconContainer"
           onClick={()=>{
-            console.log(config.slider)
             if(!config.slider){
               document.getElementById('configSlider').style.left="0px";
               config.slider=true;
               return;
             }else{
-              document.getElementById('configSlider').style.left="-385px";
+              document.getElementById('configSlider').style.left="-350px";
               document.getElementById('cellarControll').style.height="0px";
               document.getElementById('importContainer').style.height="0px";
               document.getElementById('accountContainer').style.height="0px";
@@ -301,7 +314,7 @@ function Cellar(props) {
               <button style={{backgroundColor:"transparent",border:"none",textAlign:'left'}}
                 onClick={()=>{
                   if(!config.callar){
-                    document.getElementById('cellarControll').style.height="300px";
+                    document.getElementById('cellarControll').style.height="320px";
                     config.callar=true;
                     return
                   }else{
@@ -312,16 +325,39 @@ function Cellar(props) {
                 }}>Gestion des Caves :</button>
                 <div className="cellarControll" id="cellarControll">
                   <Card>
-                  <h6>Ajouter une cave :</h6>
-                  <label>Nom de la cave :</label>
-                  <input></input>
-                  <button>Ajouter</button>
+                    <h6>Ajouter une cave :</h6>
+                    {tinyComponents.input("Nom de la cave :",{},{},"cellarName","text","cellarName","",true,10,"",handleData,rowData.cellarName)}
+                    <Button onClick={
+                      ()=>{
+                        let n=1+cellar.length
+                        fetchToApi("add",{"cellar":n,"cellarName": rowData.cellarName ,"shelf":1});
+                        alert("la cave " + rowData.cellarName + " a été créée")
+                      }
+                    }>Ajouter</Button>
                   </Card>
                   <Card>
-                  <h6>Supprimer une cave :</h6>
-                  <label>Nom de la cave :</label>
-                  <input></input>
-                  <button>Supprimer</button>
+                      <h6>Modifier une cave :</h6>
+                      {tinyComponents.input("Nom de la cave :",{},{},"modifyCellar","text","cellar","",true,10,"",handleData,rowData.cellar)}
+                      <Button onClick={
+                        ()=>{
+                          console.log(rowData)
+                          //let umptyData=dataControl.umptyProductList()
+                          //setCellar(umptyData[0]);
+                          //setProductByCellarList(umptyData[1]);
+                        }
+                      }>Modifier</Button>
+                  </Card>
+                  <Card>
+                      <h6>Supprimer une cave :</h6>
+                      {tinyComponents.input("Nom de la cave :",{},{},"deleteCellar","text","cellar","",true,10,"",handleData,rowData.cellar)}
+                      <Button onClick={
+                        ()=>{
+                          console.log(rowData)
+                          //let umptyData=dataControl.umptyProductList()
+                          //setCellar(umptyData[0]);
+                          //setProductByCellarList(umptyData[1]);
+                        }
+                      }>Supprimer</Button>
                   </Card>
                 </div>
             </Card>
@@ -380,7 +416,7 @@ function Cellar(props) {
             </div>
           </div>    
         <div className="cellarCarousel">
-            {caroussel.cellar(cellar,productByCellarList,handleRowData,cellarChoise,modalControl)}
+            {caroussel.cellar(cellar,productByCellarList,handleRowData,cellarChoise,modalControl,activeCellar,cellarName)}
         </div>
       </div>
     );

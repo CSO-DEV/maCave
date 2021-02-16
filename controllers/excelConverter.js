@@ -18,27 +18,28 @@ const xlConverter = {
                 },
                 columnToKey:{
                     A:"cellar",
-                    B:"shelf",
-                    C:"position",
-                    D:"registrationDate",
-                    E:"color",
-                    F:"region",
-                    G:"appellation",
-                    H:"vintage",
-                    I:"winery",
-                    J:"miniAppogee",
-                    K:"maxiAppogee",
-                    L:"grape",
-                    M:"purchasePrice",
-                    N:"purchasePlace",
-                    O:"sellingPrice",
-                    P:"score",
-                    Q:"comment",
-                    R:"picture",
-                    S:"deletionDate",
-                    T:"consumptionDate",
-                    U:"bottleType",
-                    V:"organic",
+                    B:"cellarName",
+                    C:"shelf",
+                    D:"position",
+                    E:"registrationDate",
+                    F:"color",
+                    G:"region",
+                    H:"appellation",
+                    I:"vintage",
+                    J:"winery",
+                    K:"miniAppogee",
+                    L:"maxiAppogee",
+                    M:"grape",
+                    N:"purchasePrice",
+                    O:"purchasePlace",
+                    P:"sellingPrice",
+                    Q:"score",
+                    R:"comment",
+                    S:"picture",
+                    T:"deletionDate",
+                    U:"consumptionDate",
+                    V:"bottleType",
+                    W:"organic",
                 }
             }]
         });
@@ -47,6 +48,7 @@ const xlConverter = {
         excelData.Données.forEach(element => {
             let data={};
             data.cellar=parseInt(element.cellar);
+            element.cellarName ? data.cellarName=element.cellarName.toString() : data.cellarName="Cave " + data.cellar;
             data.shelf=parseInt(element.shelf);
             element.cellar ? data.cellar=parseInt(element.cellar) : data.cellar=null;
             element.shelf ? data.shelf=parseInt(element.shelf) : data.shelf=null;

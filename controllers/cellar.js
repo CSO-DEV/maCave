@@ -35,6 +35,7 @@ const cellar = {
     const body=req.body.product;
     const product={
       "cellar":body.cellar,
+      "cellarName":body.cellarName,
       "shelf":body.shelf,
       "position":body.position,
       "registrationDate":body.registrationDate,
