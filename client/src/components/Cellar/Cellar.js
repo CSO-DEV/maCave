@@ -60,7 +60,8 @@ function Cellar(props) {
                 setCellarName(fullData[3])
                 setProductByCellarList(fullData[1]);
                 setProductList(fullData[2]);
-                if(activeCellar.length===0){setActiveCellar(fullData[3][0])}
+                if(activeCellar.length===0){setActiveCellar(fullData[3][0])};
+                cellarDisplay(fullData[3][0].cellar.toString());
               };
 
               },
@@ -174,10 +175,17 @@ function Cellar(props) {
   function cellarChoise(e){
     let data=e.target.value.split('_');
     setActiveCellar({"cellar":parseInt(data[0]), "cellarName":data[1]});
+    cellarDisplay(data[0]);    
+  };
 
+  /**
+   * 
+   * @param {*} num 
+   */
+  function cellarDisplay(num){
     let cellar = document.getElementsByClassName('cellarDisplay');
     for(let i=0;i<cellar.length;i++){
-      if(cellar[i].id===data[0]){
+      if(cellar[i].id===num){
         document.getElementById(cellar[i].id).style.display='flex';
       }else{
         document.getElementById(cellar[i].id).style.display='none'; 
@@ -215,7 +223,7 @@ function Cellar(props) {
     };
   };
 
-    /**
+  /**
    * @method addProductModal : Lance et gère la modale de détail *
    * @param toggledModal : Etat d'affichage de la modale *
    */
@@ -236,10 +244,8 @@ function Cellar(props) {
       }  
     };
   };
-
-
 /**
- * @function alertModal : Lance et gère la modale d'alerte *
+ * @const alertModal : Lance et gère la modale d'alerte *
  * @param toggledAlertModal : Etat d'affichage de la modale d'alerte *
  */
   const alertModal=(toggledAlertModal)=>{
