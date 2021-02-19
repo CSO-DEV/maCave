@@ -35,15 +35,12 @@ const caroussels={
                 dataField: 'name',
                 text: title,
                 formatter: (cellContent, row) => {
-                    if(row.appellation==="Ajouter"){             
-                        return(
-                            <div className="wineRow wineRowButton">
-                                <Button variant="secondary" size="sm" onClick={()=>{
-                                    handleRowData(row);
-                                    modalControl(true,"addProduct")                             
-                                }}>+<FaWineBottle/></Button>                     
-                            </div>
-                            )
+                    if(row.appellation==="Ajouter"){
+                        return (
+                            <>
+                            {tinyComponents.addBottle(row,handleRowData,modalControl)}
+                            </>
+                        )            
                     }else{
                       return(
                           <div className="wineRow">
@@ -83,43 +80,15 @@ const caroussels={
         function shelf(array,cellar){
             return array.map((element,index)=>{
                 let [frontData,backData,frontTitle,backtTitle]=[[],[],"",""];
-                if(element.shelfContent[0].avant){
+                console.log(element)
                     element.shelfContent[0].avant.forEach(list => {
                         frontData.push(list); 
                     });                    
-                    frontData.push({
-                                    appellation:"Ajouter",
-                                    cellar:cellar,
-                                    shelf:element.shelf,
-                                    position:"Avant"
-                                });                               
-                    
-                }else{
-                    frontData.push({
-                        appellation:"Ajouter",
-                        cellar:cellar,
-                        shelf:element.shelf,
-                        position:"Avant"
-                    })
-                };
-                if(element.shelfContent[1].arriere){
+                  
                     element.shelfContent[1].arriere.forEach(list => {
                         backData.push(list); 
                     }); 
-                    backData.push({
-                                    appellation:"Ajouter",
-                                    cellar:cellar,
-                                    shelf:element.shelf,
-                                    position:"Arrière"
-                                });                    
-                }else{
-                    backData.push({
-                        appellation:"Ajouter",
-                        cellar:cellar,
-                        shelf:element.shelf,
-                        position:"Arrière"
-                    })
-                };
+
                 frontTitle="Clayette " + element.shelf + " Avant";
                 backtTitle="Clayette " + element.shelf + " Arrière";               
                 
@@ -136,7 +105,8 @@ const caroussels={
             <>
             <div className="cellarCarouselheader">
                 {tinyComponents.filter("","",cellarNameList,cellarChoise,"Cave ","","")}
-     
+                {tinyComponents.search()}
+                {tinyComponents.addBottle({},handleRowData,modalControl)}
                 
             </div> 
             <div className="cellarGlobalDisplay" id="cellarGlobalDisplay">

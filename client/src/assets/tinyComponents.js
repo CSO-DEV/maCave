@@ -4,7 +4,7 @@
 
  import {Form,Modal,Button} from 'react-bootstrap'
  import {AiOutlinePoweroff} from "react-icons/ai";
- import {FaLeaf,FaWineGlassAlt,FaWineBottle} from 'react-icons/fa';
+ import {FaLeaf,FaWineGlassAlt,FaSearch,FaWineBottle} from 'react-icons/fa';
 
  
  
@@ -112,9 +112,9 @@
       * @param id 
       * @param onclick 
       */
-     logOut(label,onclick,labelClass,id){
+     logout(label,onclick,labelClass,id){
          return(
-            <div className="tinyLogOut">
+            <div className="tinyLogout">
                 <label className={labelClass} htmlFor={id}>{label}</label>
                 <button 
                 id={id}
@@ -123,6 +123,35 @@
             </div>
          )
      },
+     /**
+      * 
+      * @param {*} id 
+      */
+     search(id,){
+        return(
+           <div className="tinySearch">
+               <Button
+               variant="secondary"
+               title="Rechercher">
+                   <FaSearch/>
+                </Button>
+           </div>
+        )
+    },
+    addBottle(row,handleRowData,modalControl){
+        return(
+           <div className="tinyAddBottle">
+               <Button 
+               variant="secondary"
+               title="Ajouter une bouteille"
+               size="sm" 
+               onClick={()=>{
+                    handleRowData(row);
+                    modalControl(true,"addProduct")                             
+            }}>+<FaWineBottle/></Button>   
+           </div>
+        )
+    },    
      /**
       * 
       * @param {*} color 
@@ -222,11 +251,11 @@
         return(
             <>
             {label? 
-            <div className="tinyLogOut">
+            <div>
                 <label style={labelStyle} htmlFor={id}>{label}</label>
                 <Form.Control
                 as="select"
-                className="my-1 mr-sm-2 categoryFilter"
+                className="my-1 mr-sm-2 tinyFilter1"
                 id={id}
                 name={name}
                 //defaultValue={categoryChoise}
@@ -240,7 +269,7 @@
             :
             <Form.Control
             as="select"
-            className="my-1 mr-sm-2 categoryFilter"
+            className="my-1 mr-sm-2 tinyFilter2"
             id={id}
             //defaultValue={categoryChoise}
             custom

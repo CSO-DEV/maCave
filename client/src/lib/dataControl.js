@@ -74,8 +74,8 @@ const dataControl = {
             {
               "shelf":1,
               "shelfContent":[
-                {"Avant":[]},
-                {"Arriere":[]}
+                {"avant":[]},
+                {"arriere":[]}
               ]
             }
           ]
@@ -97,7 +97,7 @@ const dataControl = {
             if(shelfElement.shelf===rowData.shelf){
               shelfElement.shelfContent.forEach(positionElement=>{
                 let position;
-                if(rowData.position==="Avant"){position="avant"}else{position="arriere"};
+                if(rowData.position==="avant"){position="avant"}else{position="arriere"};
                 if(positionElement[position]){
                   positionElement[position].forEach(element=>{
                     if(element._id===rowData._id){

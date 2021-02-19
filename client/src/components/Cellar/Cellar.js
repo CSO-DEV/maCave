@@ -292,7 +292,7 @@ function Cellar(props) {
             <div className='recapDisconnectContainer'>
               {recap.bottleRecap(productList,"35px")}
               <div className="cellarDisconnectionButton">
-                {tinyComponents.logOut(name, setRedirectionLogout)}
+                {tinyComponents.logout(name, setRedirectionLogout)}
               </div>
             </div>            
           </div>
